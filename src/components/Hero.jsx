@@ -6,20 +6,24 @@ import ImageMouseTrail from './common/mousetrail'
 import { FlipWords } from './ui/flip-words'
 import { ArrowRight, Mail } from 'lucide-react'
 import AnimatedShinyText from './ui/animated-shiny-text'
+import image1 from "@/assets/images/photo/photo-1706049379414-437ec3a54e93.avif";
+import image2 from "@/assets/images/photo/photo-1709949908058-a08659bfa922.avif";
 
-
+// const images = [
+//   '/src/assets/sfx/click.wav',
+//   'https://images.unsplash.com/photo-1709949908058-a08659bfa922?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1548192746-dd526f154ed9?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1693581176773-a5f2362209e6?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1584043204475-8cc101d6c77a?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1709949908058-a08659bfa922?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1518599904199-0ca897819ddb?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1706049379414-437ec3a54e93?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1709949908219-fd9046282019?q=80&w=1200&auto=format',
+//   'https://images.unsplash.com/photo-1508873881324-c92a3fc536ba?q=80&w=1200&auto=format',
+// ]
 const images = [
-  'https://images.unsplash.com/photo-1709949908058-a08659bfa922?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1548192746-dd526f154ed9?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1693581176773-a5f2362209e6?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1584043204475-8cc101d6c77a?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1709949908058-a08659bfa922?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1518599904199-0ca897819ddb?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1706049379414-437ec3a54e93?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1709949908219-fd9046282019?q=80&w=1200&auto=format',
-  'https://images.unsplash.com/photo-1508873881324-c92a3fc536ba?q=80&w=1200&auto=format',
+  image1, image1, image1, image1, image2, image2, image2, image2, image2, image2,
 ]
-
 
 export default function Hero() {
   const { scrollY } = useScroll()
@@ -31,7 +35,7 @@ export default function Hero() {
     <div className="relative min-h-[90vh] flex items-center">
       <ImageMouseTrail
         items={images}
-        maxNumberOfImages={5}
+        maxNumberOfImages={8}
         distance={25}
         imgClass="sm:w-40 w-28 sm:h-48 h-36"
       >
