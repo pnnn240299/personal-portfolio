@@ -1,18 +1,23 @@
 {
-     "files": [],
-     "references": [
-       {
-         "path": "./tsconfig.app.json"
-       },
-       {
-         "path": "./tsconfig.node.json"
-       }
-     ],
-     "compilerOptions": {
-       "baseUrl": ".",
-       "paths": {
-         "@/*": ["./src/*"]
-       }
-     }
-   }
-   
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ES6",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  }
+}
