@@ -17,6 +17,8 @@ import ContactList from "@/admin/pages/contact";
 import SignIn from "@/admin/pages/auth/SignIn";
 import Settings from "../pages/Settings";
 import About from "../pages/about";
+import ProfilePage from "../pages/profiles";
+import ExternalLinksManager from "../pages/external_links";
 
 const routes = [
   {
@@ -31,7 +33,7 @@ const routes = [
     layout: "/admin",
     path: "profiles",
     icon: <MdPerson className="h-6 w-6" />,
-    component: <Profile />,
+    component: <ProfilePage />,
   },
   {
     name: "Project",
@@ -39,6 +41,13 @@ const routes = [
     path: "project",
     icon: <MdPerson className="h-6 w-6" />,
     component: <Project />,
+  },
+  {
+    name: "external_links",
+    layout: "/admin",
+    path: "external_link",
+    icon: <MdPerson className="h-6 w-6" />,
+    component: <ExternalLinksManager />,
   },
   {
     name: "Blog",

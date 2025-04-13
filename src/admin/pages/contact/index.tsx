@@ -1,42 +1,27 @@
-import React from "react";
+import tableDataDevelopment from "../tables/variables/tableDataDevelopment";
+import DevelopmentTable from "../../components/table/DefaultTable";
 import { Link } from "react-router-dom";
 
 const ContactList = () => {
-  // Mock dữ liệu contact
   const contacts = [
     { id: 1, name: "John Doe", email: "john@example.com" },
     { id: 2, name: "Jane Smith", email: "jane@example.com" },
   ];
 
   return (
-    <div className="p-4 bg-white shadow rounded-lg">
-      <h1 className="text-xl font-bold mb-4">Contact Management</h1>
-      <Link to="/admin/contacts/create" className="bg-blue-500 text-white px-4 py-2 rounded">
-        + Add Contact
-      </Link>
-      <table className="w-full mt-4 border-collapse">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border p-2">ID</th>
-            <th className="border p-2">Name</th>
-            <th className="border p-2">Email</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contacts.map((contact) => (
-            <tr key={contact.id} className="border">
-              <td className="p-2">{contact.id}</td>
-              <td className="p-2">{contact.name}</td>
-              <td className="p-2">{contact.email}</td>
-              <td className="p-2">
-                <Link to={`/admin/contacts/edit/${contact.id}`} className="text-blue-500 mr-2">Edit</Link>
-                <button className="text-red-500">Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Quản lý Bài viết</h2>
+        <Link
+          to="/admin/blog/create"
+          className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
+        >
+          + Viết bài mới
+        </Link>
+      </div>
+      <div className="mt-5 grid h-full grid-cols-1 gap-5 md:grid-cols-1">
+        <DevelopmentTable tableData={tableDataDevelopment} />
+      </div>
     </div>
   );
 };

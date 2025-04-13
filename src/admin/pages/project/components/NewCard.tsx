@@ -1,16 +1,18 @@
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Card from "@/admin/components/card";
+import { Link } from "react-router-dom";
 
 const NewCard = (props: {
   image: string;
-  title: string;
+  name: string;
   description: string;
-  technologies: { name: string; icon: string; link: string }[];
+  technologies: { title: string; icon: string; url: string }[];
   demoLink?: string;
+  edit?: string;
   extra?: string;
 }) => {
-  const { title, image, description, technologies, demoLink, extra } = props;
+  const { name, image, description, technologies, demoLink, edit, extra } = props;
   const [heart, setHeart] = useState(false);
 
   return (
@@ -22,7 +24,7 @@ const NewCard = (props: {
         <img
           src={image}
           className="w-full h-48 object-cover rounded-t-lg"
-          alt={title}
+          alt={name}
         />
         {/* Nút Yêu thích */}
         <button
@@ -42,7 +44,7 @@ const NewCard = (props: {
         {/* Tiêu đề */}
         <div>
           <p className="text-lg font-bold text-gray-900">Tên dự án:</p>
-          <p className="mt-1 text-sm font-medium text-gray-600">{title}</p>
+          <p className="mt-1 text-sm font-medium text-gray-600">{name}</p>
         </div>
 
         {/* Mô tả ngắn */}
@@ -52,22 +54,26 @@ const NewCard = (props: {
         </div>
 
         {/* Công nghệ sử dụng */}
-        <div>
+        <>
           <p className="text-sm font-bold text-brand-500">Công nghệ sử dụng:</p>
-          <div className="mt-2 flex flex-wrap gap-3">
-            {technologies.map((tech, key) => (
-              <a
-                key={key}
-                href={tech.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md shadow-sm transition-transform transform hover:scale-110"
-              >
-                <img src={tech.icon} alt={tech.name} className="w-8 h-8" />
-              </a>
-            ))}
-          </div>
-        </div>
+          {Array.isArray(technologies) && technologies.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-3">
+              {technologies.map((tech, key) => (
+                <a
+                  key={key}
+                  href={tech?.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md shadow-sm transition-transform transform hover:scale-110"
+                >
+                  <img src={tech?.icon} alt={tech?.title} className="w-8 h-8" />
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm italic">Chưa có thông tin công nghệ.</p>
+          )}
+        </>
 
         {/* Link demo (Button) - Căn phải */}
         {demoLink && (
@@ -82,6 +88,14 @@ const NewCard = (props: {
             </a>
           </div>
         )}
+        <div className="flex justify-between items-center mt-4">
+          <Link
+            to={edit}
+            className="text-blue-500 text-sm hover:underline"
+          >
+            Chỉnh sửa
+          </Link>
+        </div>
       </div>
     </Card>
   );
