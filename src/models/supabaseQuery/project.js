@@ -16,7 +16,7 @@ const projectExternalLinkModel = {
     filters: [],
     order: {
       column: "id",
-      ascending: true
+      ascending: false
     }
   };
   

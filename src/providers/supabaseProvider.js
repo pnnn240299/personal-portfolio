@@ -13,31 +13,33 @@ export const supabaseProvider = (tableName, options = {}) => {
                 query = query.order(order.column, { ascending: order.ascending });
             }
             const { data, error } = await query;
-            // console.log(data, 'nhan');
             if (error) throw error;
             return data;
         },
 
         getItem: async (id) => {
-            const { data, error } = await supabase.from(tableName).select("*").eq("id", id).single();
+            const { data, error } = await supabase.from(tableName).select(select).eq("id", id).single();
             if (error) throw error;
             return data;
         },
 
-        createItem: async (item) => {
-            const { data, error } = await supabase.from(tableName).insert([item]);
+        createItem: async (items) => {
+            const isArray = Array.isArray(items);
+            const payload = isArray ? items : [items];
+            const { data, error } = await supabase.from(tableName).insert(payload).select();
             if (error) throw error;
-            return data[0];
+
+            return isArray ? data : data[0]; // Trả về mảng nếu truyền mảng, ngược lại thì 1 object
         },
 
         updateItem: async (id, newItem) => {
-            const { data, error } = await supabase.from(tableName).update(newItem).eq("id", id);
+            const { data, error } = await supabase.from(tableName).update(newItem).eq("id", id).select();
             if (error) throw error;
             return data[0];
         },
 
-        deleteItem: async (id) => {
-            const { error } = await supabase.from(tableName).delete().eq("id", id);
+        deleteItem: async (id, field) => {
+            const { error } = await supabase.from(tableName).delete().eq(field, id);
             if (error) throw error;
             return true;
         },

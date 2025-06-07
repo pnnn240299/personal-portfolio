@@ -36,7 +36,8 @@ const useDataCRUD = (tableName, optionsOrModel = {}) => {
 
   const getItem = async (id) => {
     try {
-      return await provider.getItem(id);
+      const result = await provider.getItem(id);
+      return result;
     } catch (err) {
       setError(err.message);
       return null;
@@ -48,6 +49,7 @@ const useDataCRUD = (tableName, optionsOrModel = {}) => {
     try {
       const newItem = await provider.createItem(item);
       setData((prev) => [...prev, newItem]);
+      return newItem;
     } catch (err) {
       setError(err.message);
     } finally {
@@ -60,6 +62,7 @@ const useDataCRUD = (tableName, optionsOrModel = {}) => {
     try {
       const updated = await provider.updateItem(id, newItem);
       setData((prev) => prev.map((item) => (item.id === id ? updated : item)));
+      return updated;
     } catch (err) {
       setError(err.message);
     } finally {
@@ -67,10 +70,10 @@ const useDataCRUD = (tableName, optionsOrModel = {}) => {
     }
   };
 
-  const deleteItem = async (id) => {
+  const deleteItem = async (id, field) => {
     setLoading(true);
     try {
-      await provider.deleteItem(id);
+      await provider.deleteItem(id, field);
       setData((prev) => prev.filter((item) => item.id !== id));
     } catch (err) {
       setError(err.message);
