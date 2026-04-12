@@ -15,7 +15,7 @@ const BlogForm = () => {
     description: "",
     thumbnail_url: "",
   });
-
+  
   useEffect(() => {
     if (isEditing) {
       (async () => {
