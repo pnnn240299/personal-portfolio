@@ -179,7 +179,7 @@ const Cards = () => {
     <div className="absolute inset-0 z-10" ref={containerRef}>
       <Card
         containerRef={containerRef}
-        src="https://res.cloudinary.com/du5gaixvs/image/upload/v1732008102/portfolio/WhatsApp_Image_2024-11-18_at_16.49.01_swnqcv.jpg"
+        src="https://img.freepik.com/free-photo/computer-scientist-designing-developing-software-applications_482257-103751.jpg?t=st=1732009403~exp=1732013003~hmac=6adbed6baa607bb09df44b22a87d06495bb03307b91ff9b702e28ae0481e759c&w=360"
         alt="Example image"
         rotate="6deg"
         top="20%"
