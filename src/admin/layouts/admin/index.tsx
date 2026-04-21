@@ -4,12 +4,14 @@ import Navbar from "@/admin/components/navbar";
 import Sidebar from "@/admin/components/sidebar";
 import Footer from "@/admin/components/footer/Footer";
 import routes from "@/admin/routes";
+import { AuthProvider, useAuth } from "@/admin/contexts/AuthContext";
+import ProtectedRoute from "@/admin/components/ProtectedRoute";
 
-export default function Admin({
+function AdminContent({
   extraRoutes = [],
   ...rest
 }: {
-  extraRoutes?: any[]; // Route bổ sung không nằm trong menu
+  extraRoutes?: any[];
   [x: string]: any;
 }) {
   const location = useLocation();
@@ -43,28 +45,44 @@ export default function Admin({
   document.documentElement.dir = "ltr";
 
   return (
-    <div className="flex h-full w-full">
-      <Sidebar open={open} onClose={() => setOpen(false)} />
-      <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
-        <main className="mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]">
-          <div className="h-full">
-            <Navbar
-              onOpenSidenav={() => setOpen(true)}
-              brandText={currentRoute}
-              {...rest}
-            />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
-              <Routes>
-                {getRoutes([...routes, ...extraRoutes])}
-                <Route path="/" element={<Navigate to="/admin/default" replace />} />
-              </Routes>
+    <ProtectedRoute>
+      <div className="flex h-full w-full">
+        <Sidebar open={open} onClose={() => setOpen(false)} />
+        <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
+          <main className="mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]">
+            <div className="h-full">
+              <Navbar
+                onOpenSidenav={() => setOpen(true)}
+                brandText={currentRoute}
+                {...rest}
+              />
+              <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
+                <Routes>
+                  {getRoutes([...routes, ...extraRoutes])}
+                  <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
+                </Routes>
+              </div>
+              <div className="p-3">
+                <Footer />
+              </div>
             </div>
-            <div className="p-3">
-              <Footer />
-            </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
+  );
+}
+
+export default function Admin({
+  extraRoutes = [],
+  ...rest
+}: {
+  extraRoutes?: any[];
+  [x: string]: any;
+}) {
+  return (
+    <AuthProvider>
+      <AdminContent extraRoutes={extraRoutes} {...rest} />
+    </AuthProvider>
   );
 }
