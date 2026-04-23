@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFormState from "@/hooks/useFormState";
 import useDataCRUD from "@/lib/useDataCRUD";
-import Editor from "./components/Editor";
+import Editor from "./components/BasicEditor.jsx";
 import Select from "react-select";
 import projectModel from "@/models/supabaseQuery/project.js";
 import { GetExternalLinks } from "@/types/external_links";
