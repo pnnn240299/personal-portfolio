@@ -1,17 +1,17 @@
-import Banner from "../../../src/admin/pages/marketplace/components/Banner";
-import NFt2 from "../../../src/admin/assets/img/nfts/Nft2.png";
-import NFt4 from "../../../src/admin/assets/img/nfts/Nft4.png";
-import NFt3 from "../../../src/admin/assets/img/nfts/Nft3.png";
-import NFt5 from "../../../src/admin/assets/img/nfts/Nft5.png";
-import NFt6 from "../../../src/admin/assets/img/nfts/Nft6.png";
-import avatar1 from "../../../src/admin/assets/img/avatars/avatar1.png";
-import avatar2 from "../../../src/admin/assets/img/avatars/avatar2.png";
-import avatar3 from "../../../src/admin/assets/img/avatars/avatar3.png";
+import Banner from "@/admin/pages/marketplace/components/Banner";
+import NFt2 from "@/admin/assets/img/nfts/Nft2.png";
+import NFt4 from "@/admin/assets/img/nfts/Nft4.png";
+import NFt3 from "@/admin/assets/img/nfts/Nft3.png";
+import NFt5 from "@/admin/assets/img/nfts/Nft5.png";
+import NFt6 from "@/admin/assets/img/nfts/Nft6.png";
+import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
+import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
+import avatar3 from "@/admin/assets/img/avatars/avatar3.png";
 
-import tableDataTopCreators from "../../../src/admin/pages/marketplace/variables/tableDataTopCreators";
-import HistoryCard from "../../../src/admin/pages/marketplace/components/HistoryCard";
-import TopCreatorTable from "../../../src/admin/pages/marketplace/components/TableTopCreators";
-import NftCard from "../../../src/admin/components/card/NftCard";
+import tableDataTopCreators from "@/admin/pages/marketplace/variables/tableDataTopCreators";
+import HistoryCard from "@/admin/pages/marketplace/components/HistoryCard";
+import TopCreatorTable from "@/admin/pages/marketplace/components/TableTopCreators";
+import NftCard from "@/admin/components/card/NftCard";
 
 const Marketplace = () => {
   return (

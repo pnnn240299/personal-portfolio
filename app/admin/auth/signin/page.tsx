@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import InputField from "../../../../src/admin/components/fields/InputField";
+import InputField from "@/admin/components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
-import Checkbox from "../../../../src/admin/components/checkbox";
-import { useAuth } from "../../../../src/admin/contexts/AuthContext";
+import Checkbox from "@/admin/components/checkbox";
+import { useAuth } from "@/admin/contexts/AuthContext";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");

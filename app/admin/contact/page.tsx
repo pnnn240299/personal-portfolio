@@ -1,5 +1,5 @@
-import tableDataDevelopment from "../../../src/admin/pages/tables/variables/tableDataDevelopment";
-import DevelopmentTable from "../../../src/admin/components/table/DefaultTable";
+import tableDataDevelopment from "@/admin/pages/tables/variables/tableDataDevelopment";
+import DevelopmentTable from "@/admin/components/table/DefaultTable";
 import Link from "next/link";
 
 const ContactList = () => {

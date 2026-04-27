@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import BlogCard from "../../../src/admin/pages/blog/components/BlogCard";
-import avatar1 from "../../../src/admin/assets/img/avatars/avatar1.png";
-import avatar2 from "../../../src/admin/assets/img/avatars/avatar2.png";
-import avatar3 from "../../../src/admin/assets/img/avatars/avatar3.png";
-import useDataCRUD from "../../../src/lib/useDataCRUD";
+import BlogCard from "@/admin/pages/blog/components/BlogCard";
+import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
+import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
+import avatar3 from "@/admin/assets/img/avatars/avatar3.png";
+import useDataCRUD from "@/lib/useDataCRUD";
 
 const mockData = [
   {

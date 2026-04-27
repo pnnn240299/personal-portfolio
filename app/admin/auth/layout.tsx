@@ -1,10 +1,10 @@
 'use client'
 
-import Footer from "../../../src/admin/components/footer/FooterAuthDefault";
-import authImg from "../../../src/admin/assets/img/auth/auth.png";
+import Footer from "@/admin/components/footer/FooterAuthDefault";
+import authImg from "@/admin/assets/img/auth/auth.png";
 import Link from "next/link";
-import FixedPlugin from "../../../src/admin/components/fixedPlugin/FixedPlugin";
-import { AuthProvider } from "../../../src/admin/contexts/AuthContext";
+import FixedPlugin from "@/admin/components/fixedPlugin/FixedPlugin";
+import { AuthProvider } from "@/admin/contexts/AuthContext";
 
 export default function AuthLayout({
   children,

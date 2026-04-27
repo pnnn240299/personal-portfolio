@@ -1,8 +1,8 @@
-import Banner from "../../../src/admin/pages/profile/components/Banner";
-import General from "../../../src/admin/pages/profile/components/General";
-import Notification from "../../../src/admin/pages/profile/components/Notification";
-import Storage from "../../../src/admin/pages/profile/components/Storage";
-import Upload from "../../../src/admin/pages/profile/components/Upload";
+import Banner from "@/admin/pages/profile/components/Banner";
+import General from "@/admin/pages/profile/components/General";
+import Notification from "@/admin/pages/profile/components/Notification";
+import Storage from "@/admin/pages/profile/components/Storage";
+import Upload from "@/admin/pages/profile/components/Upload";
 
 const ProfileOverview = () => {
   return (

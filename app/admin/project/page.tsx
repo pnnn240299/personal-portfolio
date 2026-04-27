@@ -1,10 +1,10 @@
-import NewCard from "../../../src/admin/pages/project/components/NewCard";
+import NewCard from "@/admin/pages/project/components/NewCard";
 import Link from "next/link";
-import useDataCRUD from "../../../src/lib/useDataCRUD";
-import projectModel from "../../../src/models/supabaseQuery/project.js";
-import { GetProjects } from "../../../src/types/projects";
-import CreateLinkButton from "../../../src/admin/components/buttons/CreateLinkButton";
-import { ButtonLink } from "../../../src/admin/components/buttons/ButtonLink";
+import useDataCRUD from "@/lib/useDataCRUD";
+import projectModel from "@/models/supabaseQuery/project.js";
+import { GetProjects } from "@/types/projects";
+import CreateLinkButton from "@/admin/components/buttons/CreateLinkButton";
+import { ButtonLink } from "@/admin/components/buttons/ButtonLink";
 import { HiPlus } from "react-icons/hi";
 
 const Project = () => {

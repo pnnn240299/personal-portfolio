@@ -1,8 +1,8 @@
-import DefaultTable from "../../../src/admin/components/table/DefaultTable";
-import { columns } from "../../../src/admin/pages/external_links/variables/columns";
+import DefaultTable from "@/admin/components/table/DefaultTable";
+import { columns } from "@/admin/pages/external_links/variables/columns";
 import Link from "next/link";
-import useDataCRUD from "../../../src/lib/useDataCRUD";
-import { GetExternalLinks } from "../../../src/types/external_links";
+import useDataCRUD from "@/lib/useDataCRUD";
+import { GetExternalLinks } from "@/types/external_links";
 
 export default function ExternalLinksManager() {
   const { data, loading, error, fetchData } = useDataCRUD<GetExternalLinks>("external_links");

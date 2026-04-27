@@ -1,6 +1,6 @@
 'use client'
 
-import Banner from "../../../src/admin/pages/profiles/components/Banner";
+import Banner from "@/admin/pages/profiles/components/Banner";
 import { useState } from "react";
 
 const ProfilePage = () => {
