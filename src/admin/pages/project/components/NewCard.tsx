@@ -1,7 +1,9 @@
+'use client'
+
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Card from "@/admin/components/card";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const NewCard = (props: {
   image: string;
@@ -90,7 +92,7 @@ const NewCard = (props: {
         )}
         <div className="flex justify-between items-center mt-4">
           <Link
-            to={edit}
+            href={edit}
             className="text-blue-500 text-sm hover:underline"
           >
             Chỉnh sửa

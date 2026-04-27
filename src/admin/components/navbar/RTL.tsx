@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "@/admin/components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import navbarimage from "@/admin/assets/img/layout/Navbar.png";
 import { BsArrowBarUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -184,7 +184,7 @@ const Navbar = (props: {
           button={
             <img
               className="h-10 w-10 rounded-full"
-              src={avatar}
+              src={avatar.src}
               alt="Elon Musk"
             />
           }

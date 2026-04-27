@@ -1,5 +1,7 @@
+'use client'
+
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/admin/contexts/AuthContext';
 
 interface ProtectedRouteProps {
@@ -8,6 +10,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -21,7 +24,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin/auth/sign-in" replace />;
+    router.push('/admin/auth/sign-in');
+    return null;
   }
 
   return <>{children}</>;

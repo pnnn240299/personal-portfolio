@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import BlogCard from "./components/BlogCard";
 import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
 import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
@@ -62,7 +62,7 @@ const BlogList = () => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Quản lý Bài viết</h2>
         <Link
-          to="/admin/blog/create"
+          href="/admin/blog/create"
           className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600"
         >
           + Viết bài mới

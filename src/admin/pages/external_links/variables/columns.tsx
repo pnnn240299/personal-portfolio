@@ -1,6 +1,6 @@
 import { generateColumns } from "@/admin/components/table/generateColumns";
 import { GetExternalLinks } from "@/types/external_links";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const columnConfig = [
   {
@@ -29,7 +29,7 @@ const columnConfig = [
     header: "Action",
     cell: (data: any) => <span>
       <Link
-        to={`/admin/external_link/edit/${data.getValue()}`}
+        href={`/admin/external_link/edit/${data.getValue()}`}
         className="text-blue-500 text-sm hover:underline"
       >
         Chỉnh sửa

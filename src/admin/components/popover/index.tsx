@@ -1,4 +1,7 @@
-import { Popover, PopoverTrigger, PopoverContent } from "@chakra-ui/popover";
+'use client'
+
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+
 const PopoverHorizon = (props: {
   trigger: JSX.Element;
   extra?: string;
@@ -6,14 +9,14 @@ const PopoverHorizon = (props: {
 }) => {
   const { extra, trigger, content } = props;
   return (
-    <Popover>
-      <PopoverTrigger>{trigger}</PopoverTrigger>
-      <PopoverContent
+    <PopoverPrimitive.Root>
+      <PopoverPrimitive.Trigger asChild>{trigger}</PopoverPrimitive.Trigger>
+      <PopoverPrimitive.Content
         className={`w-max rounded-xl bg-white py-3 px-4 text-sm shadow-xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none ${extra}`}
       >
         {content}
-      </PopoverContent>
-    </Popover>
+      </PopoverPrimitive.Content>
+    </PopoverPrimitive.Root>
   );
 };
 

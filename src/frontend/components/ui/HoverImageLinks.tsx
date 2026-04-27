@@ -1,6 +1,9 @@
+'use client'
+
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import React, { useRef } from "react";
+import Link from "next/link";
 
 const navLinks = [
      { id: "01", name: "Home", href: "/" },
@@ -29,7 +32,7 @@ export const HoverImageLinks = ({
                `}
                >
                     {navLinks.map((link) => (
-                         <Link
+                         <HoverLink
                               key={link.id}
                               heading={link.name}
                               subheading={`Explore our ${link.name.toLowerCase()}`}
@@ -43,7 +46,7 @@ export const HoverImageLinks = ({
      );
 };
 
-const Link = ({ 
+const HoverLink = ({ 
      heading, 
      imgSrc, 
      subheading, 
@@ -78,98 +81,100 @@ const Link = ({
      };
 
      return (
-          <motion.a
-               href={href}
-               ref={ref}
-               onMouseMove={handleMouseMove}
-               initial="initial"
-               whileHover="whileHover"
-               className={`
-                    group relative flex items-center justify-between 
-                    ${isFullScreen
-                         ? 'border-b-2 border-neutral-600 py-6 md:py-4'
-                         : 'border-b-2 border-neutral-700 py-4 md:py-2'
-                    } 
-                    transition-colors duration-500 hover:border-neutral-50
-               `}
-          >
-               <div>
-                    <motion.span
-                         variants={{
-                              initial: { x: 0 },
-                              whileHover: { x: -16 },
-                         }}
-                         transition={{
-                              type: "spring",
-                              staggerChildren: 0.075,
-                              delayChildren: 0.25,
-                         }}
-                         className={`
-                              relative z-10 block 
-                              ${isFullScreen
-                                   ? 'text-5xl md:text-6xl font-bold text-neutral-300'
-                                   : 'text-4xl md:text-4xl font-bold text-neutral-500'
-                              } 
-                              transition-colors duration-500 group-hover:text-neutral-50
-                         `}
-                    >
-                         {heading.split("").map((l, i) => (
-                              <motion.span
-                                   variants={{
-                                        initial: { x: 0 },
-                                        whileHover: { x: 16 },
-                                   }}
-                                   transition={{ type: "spring" }}
-                                   className="inline-block"
-                                   key={i}
-                              >
-                                   {l}
-                              </motion.span>
-                         ))}
-                    </motion.span>
-               </div>
-
-               <motion.img
-                    style={{
-                         top,
-                         left,
-                         translateX: "-50%",
-                         translateY: "-50%",
-                         display: isFullScreen ? "none" : "block"
-                    }}
-                    variants={{
-                         initial: { scale: 0, rotate: "-12.5deg" },
-                         whileHover: { scale: 1, rotate: "12.5deg" },
-                    }}
-                    transition={{ type: "spring" }}
-                    src={imgSrc}
-                    className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
-                    alt={`Image representing a link for ${heading}`}
-               />
-
+          <Link href={href || '#'}>
                <motion.div
-                    variants={{
-                         initial: {
-                              x: "25%",
-                              opacity: 0,
-                         },
-                         whileHover: {
-                              x: "0%",
-                              opacity: 1,
-                         },
-                    }}
-                    transition={{ type: "spring" }}
-                    className="relative z-10 p-4"
+                    ref={ref}
+                    onMouseMove={handleMouseMove}
+                    initial="initial"
+                    whileHover="whileHover"
+                    className={`
+                         group relative flex items-center justify-between 
+                         ${isFullScreen
+                              ? 'border-b-2 border-neutral-600 py-6 md:py-4'
+                              : 'border-b-2 border-neutral-700 py-4 md:py-2'
+                         } 
+                         transition-colors duration-500 hover:border-neutral-50
+                         cursor-pointer
+                    `}
                >
-                    <ArrowRight
-                         className={`
-                              ${isFullScreen
-                                   ? 'text-6xl text-neutral-300'
-                                   : 'text-5xl text-neutral-50'
-                              }
-                         `}
+                    <div>
+                         <motion.span
+                              variants={{
+                                   initial: { x: 0 },
+                                   whileHover: { x: -16 },
+                              }}
+                              transition={{
+                                   type: "spring",
+                                   staggerChildren: 0.075,
+                                   delayChildren: 0.25,
+                              }}
+                              className={`
+                                   relative z-10 block 
+                                   ${isFullScreen
+                                        ? 'text-5xl md:text-6xl font-bold text-neutral-300'
+                                        : 'text-4xl md:text-4xl font-bold text-neutral-500'
+                                   } 
+                                   transition-colors duration-500 group-hover:text-neutral-50
+                              `}
+                         >
+                              {heading.split("").map((l, i) => (
+                                   <motion.span
+                                        variants={{
+                                             initial: { x: 0 },
+                                             whileHover: { x: 16 },
+                                        }}
+                                        transition={{ type: "spring" }}
+                                        className="inline-block"
+                                        key={i}
+                                   >
+                                        {l}
+                                   </motion.span>
+                              ))}
+                         </motion.span>
+                    </div>
+
+                    <motion.img
+                         style={{
+                              top,
+                              left,
+                              translateX: "-50%",
+                              translateY: "-50%",
+                              display: isFullScreen ? "none" : "block"
+                         }}
+                         variants={{
+                              initial: { scale: 0, rotate: "-12.5deg" },
+                              whileHover: { scale: 1, rotate: "12.5deg" },
+                         }}
+                         transition={{ type: "spring" }}
+                         src={imgSrc}
+                         className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
+                         alt={`Image representing a link for ${heading}`}
                     />
+
+                    <motion.div
+                         variants={{
+                              initial: {
+                                   x: "25%",
+                                   opacity: 0,
+                              },
+                              whileHover: {
+                                   x: "0%",
+                                   opacity: 1,
+                              },
+                         }}
+                         transition={{ type: "spring" }}
+                         className="relative z-10 p-4"
+                    >
+                         <ArrowRight
+                              className={`
+                                   ${isFullScreen
+                                        ? 'text-6xl text-neutral-300'
+                                        : 'text-5xl text-neutral-50'
+                                   }
+                              `}
+                         />
+                    </motion.div>
                </motion.div>
-          </motion.a>
+          </Link>
      );
 };

@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import Dropdown from "@/admin/components/dropdown";
 import { AiOutlineUser } from "react-icons/ai";

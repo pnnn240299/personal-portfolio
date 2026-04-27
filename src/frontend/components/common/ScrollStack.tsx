@@ -32,6 +32,10 @@
 
 //   );
 // }
+// 'use client'
+
+'use client'
+
 import React, { useEffect } from "react";
 import { ReactLenis } from "lenis/react";
 import AboutUs from "./aboutus";
@@ -51,7 +55,9 @@ export default function ScrollStack({ onSectionChange }) {
         if (window.scrollY >= sectionTop - 50 && window.scrollY < sectionTop + sectionHeight) {
           const sectionId = section.getAttribute('id');
           console.log('Current Section:', sectionId); // Log active section
-          onSectionChange(sectionId);
+          if (onSectionChange && typeof onSectionChange === 'function') {
+            onSectionChange(sectionId);
+          }
         }
       });
     };

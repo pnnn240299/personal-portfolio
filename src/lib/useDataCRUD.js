@@ -1,21 +1,10 @@
+'use client'
+
 import { useEffect, useState } from "react";
-import providers from "../providers";
+import restApiProvider from "../providers/restApiProvider";
 
-const useDataCRUD = (tableName, optionsOrModel = {}) => {
-  const providerKey = optionsOrModel?.provider || import.meta.env.REACT_APP_DATA_PROVIDER || "supabase";
-  const providerFn = providers[providerKey];
-
-  if (!providerFn) {
-    throw new Error(`Unknown provider: ${providerKey}`);
-  }
-
-  // Nếu là supabase thì dùng projectModel (full config), còn provider khác thì bỏ qua các field như select, filters...
-  let providerOptions = {};
-  if (providerKey === "supabase") {
-    providerOptions = optionsOrModel; // full config từ model
-  }
-
-  const provider = providerFn(tableName, providerOptions);
+const useDataCRUD = (tableName) => {
+  const provider = restApiProvider(tableName);
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -89,4 +78,4 @@ const useDataCRUD = (tableName, optionsOrModel = {}) => {
   return { data, loading, error, fetchData, getItem, createItem, updateItem, deleteItem };
 };
 
-export default useDataCRUD; 
+export default useDataCRUD;

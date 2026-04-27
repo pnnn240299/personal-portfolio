@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import useDataCRUD from "@/lib/useDataCRUD";
 
 const ExternalLinkForm = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const isEditing = !!id;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+    const isEditing = !!id;
   const { createItem, updateItem, getItem, loading, error, success } = useDataCRUD("external_links");
 
   const [formData, setFormData] = useState({

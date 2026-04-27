@@ -11,7 +11,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/frontend/components/ui/sheet"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 const navLinks = [
   { id: "01", name: "Home", href: "/" },
@@ -49,7 +49,7 @@ export default function Navbar({ activeSection }) {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4 rounded-lg">
           <div className="flex items-center">
-            <Link to={'/'}>
+            <Link href={'/'}>
               <div className="flex-shrink-0 bg-green-500 rounded-full">
                 <Asterisk size={40} className="text-secondary" />
               </div>
@@ -58,7 +58,7 @@ export default function Navbar({ activeSection }) {
             <div className="hidden md:block ml-10">
               <div className="flex items-baseline space-x-4">
                 {navLinks.map((item) => (
-                  <Link key={item.name} to={item.href}>
+                  <Link key={item.name} href={item.href}>
                     <Button
                       variant="ghost"
                       className={`text-sm transition-all duration-300 font-medium ${activeSection === "aboutus" ? "text-gray-900" :
@@ -77,7 +77,7 @@ export default function Navbar({ activeSection }) {
             </div>
           </div>
           <div className="flex items-center">
-            <Link to={'https://github.com/'} >
+            <Link href={'https://github.com/'} >
               <Button variant="ghost" size="icon" className="mr-2 bg-green-400">
                 <Github className="h-5 w-5" />
               </Button>
@@ -104,7 +104,7 @@ export default function Navbar({ activeSection }) {
                   {navLinks.map((item) => (
                     <Link
                       key={item.name}
-                      to={item.href}
+                      href={item.href}
                       onClick={() => {
                         setIsOpen(false)
                         playClickSound()

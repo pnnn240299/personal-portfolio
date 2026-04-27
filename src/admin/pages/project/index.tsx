@@ -1,7 +1,7 @@
 
 
 import NewCard from "@/admin/pages/project/components/NewCard";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import useDataCRUD from "../../../lib/useDataCRUD";
 import projectModel from "@/models/supabaseQuery/project.js";
 import { GetProjects } from "@/types/projects";
@@ -18,7 +18,7 @@ const Project = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">List</h2>
-        <ButtonLink to="/admin/project/create" variant="green">
+        <ButtonLink href="/admin/project/create" variant="green">
           <HiPlus />
           Create
         </ButtonLink>

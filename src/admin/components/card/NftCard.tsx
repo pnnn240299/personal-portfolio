@@ -1,3 +1,5 @@
+'use client'
+
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Card from "@/admin/components/card";

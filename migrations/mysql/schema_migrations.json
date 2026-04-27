@@ -1,0 +1,6 @@
+{
+  "applied": [
+    "20260424000000_create_portfolio_schema.sql",
+    "20260424010000_create_users_table.sql"
+  ]
+}

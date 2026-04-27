@@ -1,5 +1,7 @@
+'use client'
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface AdminUser {
   id: string;
@@ -33,7 +35,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // Check for existing session on mount
   useEffect(() => {
@@ -46,27 +48,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
-    
+
     try {
-      // Simple authentication logic (you can replace this with API call)
-      // For demo purposes, using hardcoded credentials
-      if (email === 'admin@portfolio.com' && password === 'admin123') {
-        const adminUser: AdminUser = {
-          id: '1',
-          email: 'admin@portfolio.com',
-          name: 'Admin User',
-          role: 'admin'
-        };
-        
-        setUser(adminUser);
-        localStorage.setItem('adminUser', JSON.stringify(adminUser));
-        return true;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+      const response = await fetch(`${apiUrl}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        return false;
       }
-      
-      // You can add more users or integrate with Supabase auth here
-      return false;
+
+      const adminUser = await response.json();
+      setUser(adminUser);
+      localStorage.setItem("adminUser", JSON.stringify(adminUser));
+      return true;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       return false;
     } finally {
       setIsLoading(false);
@@ -76,7 +78,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('adminUser');
-    navigate('/admin/auth/sign-in');
+    router.push('/admin/auth/sign-in');
   };
 
   const value: AuthContextType = {

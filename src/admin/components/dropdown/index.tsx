@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 
 function useOutsideAlerter(ref: any, setX: any): void {

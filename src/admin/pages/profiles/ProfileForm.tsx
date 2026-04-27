@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "next/navigation";
 
 const ProfileForm = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  
   const [formData, setFormData] = useState({
     name: id ? "John Doe" : "",
     email: id ? "john@example.com" : "",
@@ -17,7 +17,7 @@ const ProfileForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Saving contact:", formData);
-    navigate("/admin/contacts");
+    window.location.href = "/admin/contacts";
   };
 
   return (

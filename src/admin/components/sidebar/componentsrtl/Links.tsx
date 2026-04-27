@@ -1,18 +1,19 @@
 /* eslint-disable */
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import DashIcon from "@/admin/components/icons/DashIcon";
 // chakra imports
 
 export function SidebarLinks(props: { routes: RoutesType[] }) {
   // Chakra color mode
-  let location = useLocation();
+  const pathname = usePathname();
 
   const { routes } = props;
 
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName: string) => {
-    return location.pathname.includes(routeName);
+    return pathname.includes(routeName);
   };
 
   const createLinks = (routes: RoutesType[]) => {
@@ -23,7 +24,7 @@ export function SidebarLinks(props: { routes: RoutesType[] }) {
         route.layout === "/rtl"
       ) {
         return (
-          <Link key={index} to={route.layout + "/" + route.path}>
+          <Link key={index} href={route.layout + "/" + route.path}>
             <div className="relative mb-3 flex hover:cursor-pointer">
               <li
                 className="my-[3px] flex cursor-pointer items-center px-8"

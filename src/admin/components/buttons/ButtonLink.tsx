@@ -1,5 +1,7 @@
+'use client'
+
 import * as React from "react";
-import { Link, LinkProps } from "react-router-dom";
+import Link from "next/link";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/frontend/lib/utils";
@@ -38,19 +40,27 @@ const buttonVariants = cva(
 
 
 export interface ButtonLinkProps
-  extends LinkProps,
+  extends Omit<React.ComponentPropsWithoutRef<typeof Link>, 'ref'>,
   VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   className?: string;
 }
 
 const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
-  ({ to, className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : Link;
+  ({ href, className, variant, size, asChild = false, ...props }, ref) => {
+    if (asChild) {
+      return (
+        <Slot
+          ref={ref}
+          className={cn(buttonVariants({ variant, size, className }))}
+          {...props}
+        />
+      );
+    }
 
     return (
-      <Comp
-        to={to}
+      <Link
+        href={href}
         ref={ref}
         className={cn(buttonVariants({ variant, size, className }))}
         {...props}

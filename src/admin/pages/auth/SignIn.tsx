@@ -1,5 +1,7 @@
+'use client'
+
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 import InputField from "@/admin/components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "@/admin/components/checkbox";
@@ -11,7 +13,7 @@ export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const { login, isLoading } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,9 +25,9 @@ export default function SignIn() {
     }
 
     const success = await login(email, password);
-    
+
     if (success) {
-      navigate("/admin/dashboard");
+      router.push("/admin/dashboard");
     } else {
       setError("Invalid email or password");
     }
@@ -41,7 +43,7 @@ export default function SignIn() {
         <p className="mb-9 ml-1 text-base text-gray-600">
           Enter your email and password to sign in!
         </p>
-        
+
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             {error}
@@ -61,38 +63,25 @@ export default function SignIn() {
           <p className="text-base text-gray-600 dark:text-white"> or </p>
           <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
         </div>
-        
+
         <form onSubmit={handleSubmit}>
           {/* Email */}
-          <InputField
-            variant="auth"
-            extra="mb-3"
-            label="Email*"
-            placeholder="admin@portfolio.com"
-            id="email"
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
 
-          {/* Password */}
-          <InputField
-            variant="auth"
-            extra="mb-3"
-            label="Password*"
-            placeholder="Min. 8 characters"
-            id="password"
+          <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-          
+
           {/* Checkbox */}
           <div className="mb-4 flex items-center justify-between px-2">
             <div className="flex items-center">
-              <Checkbox 
+              <Checkbox
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
               />
@@ -107,8 +96,8 @@ export default function SignIn() {
               Forgot Password?
             </a>
           </div>
-          
-          <button 
+
+          <button
             type="submit"
             className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
             disabled={isLoading}
@@ -116,7 +105,7 @@ export default function SignIn() {
             {isLoading ? "Signing In..." : "Sign In"}
           </button>
         </form>
-        
+
         <div className="mt-4">
           <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
             Demo credentials:

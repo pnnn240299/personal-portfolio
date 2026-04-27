@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import useDataCRUD from "../../../lib/useDataCRUD";
 import Editor from "./components/Editor";
 
 const BlogForm = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const isEditing = !!id;
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+    const isEditing = !!id;
   const { createItem, updateItem, getItem, loading, error, success } = useDataCRUD("blogs");
 
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ const BlogForm = () => {
     } else {
       await createItem(formData);
     }
-    navigate("/admin/blog");
+    router.push("/admin/blogs");
   };
 
   return (

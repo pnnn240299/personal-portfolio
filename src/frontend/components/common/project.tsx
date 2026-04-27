@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { ArrowRight, MoveRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import essentialharvest from '@/frontend/assets/projects/mockups/eh1.png'
 import janvry from '@/frontend/assets/projects/mockups/janvry.png'
 import cursify from '@/frontend/assets/projects/mockups/cursify.png'
@@ -85,7 +85,7 @@ export default function Projects() {
                               <h2 className="text-green-500 text-4xl font-bold">FEATURED PROJECTS</h2>
                               <p className="text-gray-400 text-lg">Selected Works</p>
                          </div>
-                         <Link className='flex gap-2 hover:border-b border-green-400 hover:text-green-400' to='/projects'>
+                         <Link className='flex gap-2 hover:border-b border-green-400 hover:text-green-400' href='/projects'>
                               See All Projects
                               <motion.div
                                    whileHover={{ x: 5 }}
@@ -119,7 +119,7 @@ export default function Projects() {
                                              {image.description}
                                         </h2>
                                         <Link
-                                             to={`/projects/${image.slug}`}
+                                             href={`/projects/${image.slug}`}
                                              className="inline-flex items-center text-green-500 hover:text-green-400 transition-colors"
                                              whileHover={{ x: 5 }}
                                              transition={{ type: "spring", stiffness: 400, damping: 10 }}

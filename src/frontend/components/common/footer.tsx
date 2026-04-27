@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { Github, Twitter, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 

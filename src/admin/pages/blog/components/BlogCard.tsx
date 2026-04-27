@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const BlogCard = ({ blog }: { blog: any }) => {
   return (
@@ -10,7 +10,7 @@ const BlogCard = ({ blog }: { blog: any }) => {
         <div className="flex justify-between items-center mt-4">
           <span className="text-gray-500 text-xs">{blog?.createdAt}</span>
           <Link
-            to={`/admin/blog/edit/${blog?.id}`}
+            href={`/admin/blog/edit/${blog?.id}`}
             className="text-blue-500 text-sm hover:underline"
           >
             Chỉnh sửa

@@ -1,8 +1,8 @@
 import React from 'react';
 
 const MultiSelect = ({ options, selectedValues, onChange }) => {
-  const handleSelectChange = (event) => {
-    const selected = Array.from(event.target.selectedOptions, (option) => option.value);
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = Array.from(event.target.selectedOptions, (option: HTMLOptionElement) => option.value);
     onChange(selected);
   };
 
