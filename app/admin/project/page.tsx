@@ -1,6 +1,6 @@
 'use client'
 
-import NewCard from "@/admin/pages/project/components/NewCard";
+import NewCard from "./components/NewCard";
 import Link from "next/link";
 import useDataCRUD from "@/lib/useDataCRUD";
 import projectModel from "@/models/supabaseQuery/project.js";

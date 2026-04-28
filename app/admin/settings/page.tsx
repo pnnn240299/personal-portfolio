@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect } from "react";
+import Image from 'next/image';
 
 const Settings = () => {
   // Mock dữ liệu settings
@@ -28,6 +29,13 @@ const Settings = () => {
     }));
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) {
+      const imageUrl = URL.createObjectURL(e.target.files[0]);
+      setSettings((prev) => ({ ...prev, siteLogo: imageUrl }));
+    }
+  };
+
   const handleSave = () => {
     // Lưu settings vào local storage hoặc gọi API lưu vào database
     localStorage.setItem("settings", JSON.stringify(settings));
@@ -52,6 +60,29 @@ const Settings = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
+          </div>
+
+          {/* Site Logo */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Site Logo
+            </label>
+            <input
+              type="file"
+              name="siteLogo"
+              onChange={handleImageUpload}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              accept="image/*"
+            />
+            {settings.siteLogo && (
+              <Image
+                src={settings.siteLogo}
+                alt="Logo Preview"
+                width={64}
+                height={64}
+                className="mt-2 h-16"
+              />
+            )}
           </div>
 
           {/* Contact Email */}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import BlogCard from "@/admin/pages/blog/components/BlogCard";
+import BlogCard from "./components/BlogCard";
 import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
 import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
 import avatar3 from "@/admin/assets/img/avatars/avatar3.png";

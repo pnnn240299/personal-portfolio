@@ -24,12 +24,22 @@ export default function mysqlProvider(table) {
     },
 
     async createItem(data) {
-      const [result] = await pool.query(
-        `INSERT INTO ${table} SET ?`,
-        [data]
-      );
-      const insertId = (result as any).insertId;
-      return { id: insertId, ...data };
+      try {
+        console.log(`Creating item in ${table} with data:`, data);
+        const [result] = await pool.query(
+          `INSERT INTO ${table} SET ?`,
+          [data]
+        );
+        const insertId = (result as any).insertId;
+        console.log(`Successfully created item with ID: ${insertId}`);
+        return { id: insertId, ...data };
+      } catch (error) {
+        console.error(`Error creating item in ${table}:`, error);
+        console.error(`Data being inserted:`, data);
+        console.error(`SQL Error Code:`, error.code);
+        console.error(`SQL Error Message:`, error.message);
+        throw new Error(`Failed to create item: ${error.message}`);
+      }
     },
 
     async updateItem(id, data) {

@@ -1,24 +1,25 @@
+'use client'
+
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import useDataCRUD from "../../../lib/useDataCRUD";
-import Editor from "./components/Editor";
+import useDataCRUD from "@/lib/useDataCRUD";
+import Editor from "../../components/Editor";
 
-const BlogForm = () => {
+const BlogEdit = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-    const isEditing = !!id;
-  const { createItem, updateItem, getItem, loading, error, success } = useDataCRUD("blogs");
+  const { updateItem, getItem, loading, error, success } = useDataCRUD("blogs");
+  const id = params.id;
 
   const [formData, setFormData] = useState({
     title: "",
     content: "",
     description: "",
     thumbnail_url: "",
+    slug: "",
   });
   
   useEffect(() => {
-    if (isEditing) {
+    if (id) {
       (async () => {
         const data = await getItem(id);
         if (data) setFormData(data);
@@ -31,20 +32,16 @@ const BlogForm = () => {
   };
 
   const handleSave = async () => {
-    if (isEditing) {
-      await updateItem(id, formData);
-    } else {
-      await createItem(formData);
+    await updateItem(id, formData);
+    if (success) {
+      router.push("/admin/blog");
     }
-    router.push("/admin/blogs");
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-md">
-        <h2 className="text-2xl font-bold mb-4">
-          {isEditing ? "Chỉnh sửa bài viết" : "Viết bài mới"}
-        </h2>
+        <h2 className="text-2xl font-bold mb-4">Chỉnh sửa bài viết</h2>
 
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
@@ -56,6 +53,16 @@ const BlogForm = () => {
           value={formData.title}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
+        />
+
+        <label className="block text-sm font-medium text-gray-700">Slug (URL thân thiện)</label>
+        <input
+          type="text"
+          name="slug"
+          value={formData.slug}
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded-md mb-4"
+          placeholder="blog-title"
         />
 
         <label className="block text-sm font-medium text-gray-700">Mô tả ngắn</label>
@@ -91,4 +98,4 @@ const BlogForm = () => {
   );
 };
 
-export default BlogForm;
+export default BlogEdit;

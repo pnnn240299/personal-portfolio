@@ -1,55 +1,6 @@
-import { useState } from "react";
 import Link from "next/link";
 import BlogCard from "./components/BlogCard";
-import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
-import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
-import avatar3 from "@/admin/assets/img/avatars/avatar3.png";
 import useDataCRUD from "../../../lib/useDataCRUD";
-
-const mockData = [
-  {
-    id: 1,
-    title: "Cách tối ưu Laravel cho dự án lớn",
-    description: "Hướng dẫn chi tiết về caching, query optimization...",
-    image: avatar1,
-    createdAt: "2024-03-10",
-  },
-  {
-    id: 2,
-    title: "ReactJS & TailwindCSS – Hướng dẫn từ A-Z",
-    description: "Cách kết hợp React và Tailwind để tạo UI chuyên nghiệp.",
-    image: avatar2,
-    createdAt: "2024-03-12",
-  },
-  {
-    id: 3,
-    title: "ReactJS & TailwindCSS – Hướng dẫn từ A-Z",
-    description: "Cách kết hợp React và Tailwind để tạo UI chuyên nghiệp.",
-    image: avatar3,
-    createdAt: "2024-03-12",
-  },
-  {
-    id: 1,
-    title: "Cách tối ưu Laravel cho dự án lớn",
-    description: "Hướng dẫn chi tiết về caching, query optimization...",
-    image: avatar1,
-    createdAt: "2024-03-10",
-  },
-  {
-    id: 2,
-    title: "ReactJS & TailwindCSS – Hướng dẫn từ A-Z",
-    description: "Cách kết hợp React và Tailwind để tạo UI chuyên nghiệp.",
-    image: avatar2,
-    createdAt: "2024-03-12",
-  },
-  {
-    id: 3,
-    title: "ReactJS & TailwindCSS – Hướng dẫn từ A-Z",
-    description: "Cách kết hợp React và Tailwind để tạo UI chuyên nghiệp.",
-    image: avatar3,
-    createdAt: "2024-03-12",
-  },
-];
 
 const BlogList = () => {
 
