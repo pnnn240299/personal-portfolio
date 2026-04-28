@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 import { ArrowRight, MoveRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from 'next/link'
+import Image from 'next/image'
 import essentialharvest from '@/frontend/assets/projects/mockups/eh1.png'
 import janvry from '@/frontend/assets/projects/mockups/janvry.png'
 import cursify from '@/frontend/assets/projects/mockups/cursify.png'
@@ -136,20 +137,18 @@ export default function Projects() {
                </div>
                <AnimatePresence>
                     {activeImage && (
-                         <motion.img
+                         <Image
                               key={activeImage.id}
                               src={activeImage.src}
                               alt={activeImage.alt}
+                              width={384}
+                              height={384}
                               className="fixed border-4 border-green-200  object-cover pointer-events-none z-10 w-96 rounded-lg shadow-lg"
                               style={{
                                    left: `${cursorPosition.x}px`,
                                    top: `${cursorPosition.y}px`,
                                    transform: 'translate(-50%, -50%)'
                               }}
-                              initial={{ opacity: 0, scale: 0.5 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.5 }}
-                              transition={{ type: "spring", stiffness: 300, damping: 25 }}
                          />
                     )}
                </AnimatePresence>

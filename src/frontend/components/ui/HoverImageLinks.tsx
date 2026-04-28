@@ -4,6 +4,7 @@ import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from 'next/image';
 
 const navLinks = [
      { id: "01", name: "Home", href: "/" },
@@ -133,7 +134,7 @@ const HoverLink = ({
                          </motion.span>
                     </div>
 
-                    <motion.img
+                    <Image
                          style={{
                               top,
                               left,
@@ -141,12 +142,9 @@ const HoverLink = ({
                               translateY: "-50%",
                               display: isFullScreen ? "none" : "block"
                          }}
-                         variants={{
-                              initial: { scale: 0, rotate: "-12.5deg" },
-                              whileHover: { scale: 1, rotate: "12.5deg" },
-                         }}
-                         transition={{ type: "spring" }}
                          src={imgSrc}
+                         width={256}
+                         height={192}
                          className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
                          alt={`Image representing a link for ${heading}`}
                     />

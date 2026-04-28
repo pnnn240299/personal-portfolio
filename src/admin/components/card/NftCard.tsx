@@ -2,6 +2,7 @@
 
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useState } from "react";
+import Image from 'next/image';
 import Card from "@/admin/components/card";
 
 const NftCard = (props: {
@@ -21,10 +22,12 @@ const NftCard = (props: {
     >
       <div className="h-full w-full">
         <div className="relative w-full">
-          <img
+          <Image
             src={image}
             className="mb-3 h-full w-full rounded-md 3xl:h-full 3xl:w-full"
             alt=""
+            width={400}
+            height={300}
           />
           <button
             onClick={() => setHeart(!heart)}
@@ -60,10 +63,12 @@ const NftCard = (props: {
                 key={key}
                 className="z-10 -mr-3 h-8 w-8 rounded-full border border-white dark:!border-navy-800"
               >
-                <img
+                <Image
                   className="h-full w-full rounded-full object-cover"
                   src={avt}
                   alt=""
+                  width={32}
+                  height={32}
                 />
               </span>
             ))}

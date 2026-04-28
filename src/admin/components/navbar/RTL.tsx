@@ -2,6 +2,7 @@ import * as React from "react";
 import Dropdown from "@/admin/components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import Link from "next/link";
+import Image from 'next/image';
 import navbarimage from "@/admin/assets/img/layout/Navbar.png";
 import { BsArrowBarUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -184,10 +185,12 @@ const Navbar = (props: {
         {/* Profile & Dropdown */}
         <Dropdown
           button={
-            <img
+            <Image
               className="h-10 w-10 rounded-full"
               src={avatar.src}
               alt="Elon Musk"
+              width={40}
+              height={40}
             />
           }
           children={

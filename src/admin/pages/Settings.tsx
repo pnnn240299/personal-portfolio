@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect } from "react";
+import Image from 'next/image';
 
 const Settings = () => {
   // Mock dữ liệu settings
@@ -67,7 +68,7 @@ const Settings = () => {
             className="w-full border p-2 rounded"
           />
           {settings.siteLogo && (
-            <img src={settings.siteLogo} alt="Logo Preview" className="mt-2 h-16" />
+            <Image src={settings.siteLogo} alt="Logo Preview" width={64} height={64} className="mt-2 h-16" />
           )}
         </div>
 

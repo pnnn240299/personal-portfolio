@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { throttle } from '@/frontend/lib/utils';
 import { Card, CardContent } from '@/frontend/components/ui/card';
@@ -79,9 +80,11 @@ export default function BlogsCarousel({ initialBlogs }: BlogsCarouselProps) {
                   <Card className="h-full border-0 shadow-none">
                     <CardContent className="p-0">
                       <div className="relative overflow-hidden rounded-t-3xl">
-                        <motion.img
-                          src={blog.image}
+                        <Image
+                          src={blog.image || ''}
                           alt={blog.title}
+                          width={500}
+                          height={200}
                           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <div className="absolute top-4 left-4">

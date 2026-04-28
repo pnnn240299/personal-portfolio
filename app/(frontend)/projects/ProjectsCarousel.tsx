@@ -8,6 +8,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MoveUpRight } from 'lucide-react';
 import { throttle } from '@/frontend/lib/utils';
 import type { Project } from '@/services';
@@ -87,16 +88,20 @@ export default function ProjectsCarousel({ initialProjects }: ProjectsCarouselPr
                 className="group relative w-[300px] md:w-[500px] overflow-hidden"
               >
                 <Link href={`/projects/${item.slug || item.id}`}>
-                  <motion.img
-                    className="w-full flex-shrink-0 h-full object-cover rounded-3xl"
-                    src={item?.image}
-                    alt={item.title}
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-white text-center">
-                      <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                      <p className="text-sm">{item.description}</p>
-                      <MoveUpRight className="mx-auto mt-4" size={24} />
+                  <div className="relative w-full h-full">
+                    <Image
+                      className="w-full flex-shrink-0 h-full object-cover rounded-3xl"
+                      src={item?.image || ''}
+                      alt={item.title}
+                      width={500}
+                      height={500}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="text-white text-center">
+                        <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
+                        <p className="text-sm">{item.description}</p>
+                        <MoveUpRight className="mx-auto mt-4" size={24} />
+                      </div>
                     </div>
                   </div>
                 </Link>

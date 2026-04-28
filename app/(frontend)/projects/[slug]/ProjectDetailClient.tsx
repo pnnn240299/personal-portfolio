@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import FuzzyOverlay from '@/frontend/components/FuzzyOverlay';
+import Image from 'next/image';
 import type { Project } from '@/services';
 
 interface ProjectDetailClientProps {
@@ -36,9 +37,10 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
           transition={{ duration: 1.5 }}
           className="absolute inset-0 z-0"
         >
-          <img
-            src={project.image}
+          <Image
+            src={project.image || ''}
             alt={project.title || project.name}
+            fill
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -135,9 +137,11 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
             animate={imageInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <img
-              src={project.image}
+            <Image
+              src={project.image || ''}
               alt={project.title || project.name}
+              width={600}
+              height={400}
               className="w-full rounded-lg"
             />
           </motion.div>

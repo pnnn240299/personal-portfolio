@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import Image from 'next/image';
 
 export const columns: ColumnDef<any, any>[] = [
   {
@@ -11,9 +12,11 @@ export const columns: ColumnDef<any, any>[] = [
     accessorKey: "icon",
     header: "Icon",
     cell: (info) => (
-      <img
+      <Image
         src={info.getValue()}
         alt="icon"
+        width={32}
+        height={32}
         className="w-8 h-8 object-contain"
       />
     ),

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState, useEffect } from "react";
+import Image from 'next/image';
 
 const About = () => {
   const [aboutData, setAboutData] = useState({
@@ -74,7 +75,7 @@ const About = () => {
         <div>
           <label className="block text-gray-700 font-medium">Image:</label>
           <input type="file" onChange={handleImageUpload} className="w-full border p-2 rounded" />
-          {aboutData.image && <img src={aboutData.image} alt="About Preview" className="mt-2 h-32" />}
+          {aboutData.image && <Image src={aboutData.image} alt="About Preview" width={128} height={128} className="mt-2 h-32" />}
         </div>
 
         {/* Save Button */}

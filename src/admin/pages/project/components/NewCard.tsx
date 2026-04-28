@@ -27,10 +27,12 @@ const NewCard = (props: {
     >
       {/* Hình ảnh */}
       <div className="relative w-full">
-        <img
+        <Image
           src={image}
           className="w-full h-48 object-cover rounded-t-lg"
           alt={name}
+          width={400}
+          height={192}
         />
         {/* Nút Yêu thích */}
         <button
