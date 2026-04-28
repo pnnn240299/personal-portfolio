@@ -33,5 +33,22 @@ export default function restApiProvider(table) {
       request(`${baseUrl}/${id}`, {
         method: 'DELETE',
       }),
+
+    uploadFile: async (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`File upload failed: ${res.status} ${res.statusText} - ${errorText}`);
+      }
+
+      return res.json();
+    },
   };
 }

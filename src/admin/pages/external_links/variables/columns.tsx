@@ -30,12 +30,25 @@ export const columns: ColumnDef<any, any>[] = [
     accessorKey: "id",
     header: "Action",
     cell: (info) => (
-      <Link
-        href={`/admin/external_link/edit/${info.getValue()}`}
-        className="text-blue-500 text-sm hover:underline"
-      >
-        Chỉnh sửa
-      </Link>
+      <div className="flex gap-2">
+        <Link
+          href={`/admin/external_link/edit/${info.getValue()}`}
+          className="text-blue-500 text-sm hover:underline"
+        >
+          Chỉnh sửa
+        </Link>
+        <button
+          onClick={() => {
+            if (confirm('Bạn có chắc chắn muốn xóa external link này?')) {
+              // Delete functionality can be implemented here
+              console.log('Delete external link:', info.getValue());
+            }
+          }}
+          className="text-red-500 text-sm hover:underline"
+        >
+          Xóa
+        </button>
+      </div>
     ),
   },
 ];

@@ -23,6 +23,30 @@ const routes = [
     path: "project",
     icon: "🚀",
   },
+  {
+    name: "External Link",
+    layout: "/admin",
+    path: "external_link",
+    icon: "🔗",
+  },
+  {
+    name: "User",
+    layout: "/admin",
+    path: "user",
+    icon: "👤",
+  },
+  {
+    name: "Profile",
+    layout: "/admin",
+    path: "profile",
+    icon: "👤",
+  },
+  {
+    name: "Settings",
+    layout: "/admin",
+    path: "settings",
+    icon: "⚙️",
+  },
 ];
 
 export default routes;

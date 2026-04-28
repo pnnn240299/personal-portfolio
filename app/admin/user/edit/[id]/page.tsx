@@ -114,7 +114,7 @@ const UserEdit = ({ params }: { params: { id: string } }) => {
 
   const hasChanges = () => {
     const { password, confirmPassword, ...currentData } = formData;
-    const { password: _, confirmPassword: __, ...original } = originalData;
+    const original = { ...originalData };
     
     return JSON.stringify(currentData) !== JSON.stringify(original) || 
            (formData.password !== "");

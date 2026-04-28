@@ -1,7 +1,7 @@
 'use client'
 
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "@/admin/components/card";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,7 +10,7 @@ const NewCard = (props: {
   image: any;
   name: string;
   description: string;
-  technologies: { title: string; icon: string; url: string }[];
+  technologies: string[]; // Array of technology names
   github?: string;
   live?: string;
   slug?: string;
@@ -20,6 +20,21 @@ const NewCard = (props: {
 }) => {
   const { name, image, description, technologies, github, live, slug, demoLink, edit, extra } = props;
   const [heart, setHeart] = useState(false);
+  const [externalLinks, setExternalLinks] = useState([]);
+
+  useEffect(() => {
+    const fetchExternalLinks = async () => {
+      try {
+        const response = await fetch('/api/external_links');
+        const links = await response.json();
+        setExternalLinks(links);
+      } catch (error) {
+        console.error('Error fetching external links:', error);
+      }
+    };
+    
+    fetchExternalLinks();
+  }, []);
 
   return (
     <Card
@@ -65,18 +80,31 @@ const NewCard = (props: {
         <>
           <p className="text-sm font-bold text-brand-500">Công nghệ sử dụng:</p>
           {Array.isArray(technologies) && technologies.length > 0 ? (
-            <div className="mt-2 flex flex-wrap gap-3">
-              {technologies.map((tech, key) => (
-                <a
-                  key={key}
-                  href={tech?.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md shadow-sm transition-transform transform hover:scale-110"
-                >
-                  <Image src={tech?.icon} alt={tech?.title} className="w-8 h-8" width={32} height={32} />
-                </a>
-              ))}
+            <div className="mt-2 flex flex-wrap gap-2">
+              {technologies.map((tech, key) => {
+                // Find matching external link by title
+                const externalLink = externalLinks.find((link: any) => 
+                  link.title.toLowerCase() === tech.toLowerCase().trim()
+                );
+                
+                return (
+                  <div
+                    key={key}
+                    className="flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium"
+                  >
+                    {externalLink?.icon && (
+                      <Image 
+                        src={externalLink.icon} 
+                        alt={tech} 
+                        className="w-4 h-4" 
+                        width={16} 
+                        height={16} 
+                      />
+                    )}
+                    <span>{tech}</span>
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <p className="text-gray-500 text-sm italic">Chưa có thông tin công nghệ.</p>

@@ -25,7 +25,8 @@ export default function mysqlProvider(table) {
 
     async createItem(data) {
       try {
-        console.log(`Creating item in ${table} with data:`, data);
+        console.log(`Creating item in ${table} with data:`, JSON.stringify(data, null, 2));
+        
         const [result] = await pool.query(
           `INSERT INTO ${table} SET ?`,
           [data]
@@ -35,10 +36,10 @@ export default function mysqlProvider(table) {
         return { id: insertId, ...data };
       } catch (error) {
         console.error(`Error creating item in ${table}:`, error);
-        console.error(`Data being inserted:`, data);
-        console.error(`SQL Error Code:`, error.code);
-        console.error(`SQL Error Message:`, error.message);
-        throw new Error(`Failed to create item: ${error.message}`);
+        console.error(`Data being inserted:`, JSON.stringify(data, null, 2));
+        console.error(`SQL Error Code:`, (error as any).code);
+        console.error(`SQL Error Message:`, (error as any).message);
+        throw new Error(`Failed to create item: ${(error as any).message}`);
       }
     },
 

@@ -10,7 +10,7 @@ const NewCard = (props: {
   image: any;
   name: string;
   description: string;
-  technologies: { title: string; icon: string; url: string }[];
+  technologies: string[]; // Changed from array of objects to array of strings
   github?: string;
   live?: string;
   slug?: string;
@@ -65,17 +65,14 @@ const NewCard = (props: {
         <>
           <p className="text-sm font-bold text-brand-500">Công nghệ sử dụng:</p>
           {Array.isArray(technologies) && technologies.length > 0 ? (
-            <div className="mt-2 flex flex-wrap gap-3">
+            <div className="mt-2 flex flex-wrap gap-2">
               {technologies.map((tech, key) => (
-                <a
+                <span
                   key={key}
-                  href={tech?.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md shadow-sm transition-transform transform hover:scale-110"
+                  className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium"
                 >
-                  <Image src={tech?.icon} alt={tech?.title} className="w-8 h-8" width={32} height={32} />
-                </a>
+                  {tech}
+                </span>
               ))}
             </div>
           ) : (

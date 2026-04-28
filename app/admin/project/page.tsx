@@ -29,10 +29,10 @@ const Project = () => {
             key={item.id}
             name={item?.name}
             description={item?.description}
-            image={item?.image}
-            technologies={item?.technologies}
-            github={item?.github}
-            live={item?.live}
+            image={item?.image_url}
+            technologies={item?.skill ? item.skill.split(',').map(tech => tech.trim()).filter(tech => tech) : []}
+            github={item?.repo_url}
+            live={item?.live_url}
             slug={item?.slug}
             edit={`/admin/project/edit/${item?.slug}`}
           />

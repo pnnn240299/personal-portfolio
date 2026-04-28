@@ -134,7 +134,7 @@ const HoverLink = ({
                          </motion.span>
                     </div>
 
-                    <Image
+                    <motion.img
                          style={{
                               top,
                               left,
