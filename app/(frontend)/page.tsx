@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Hero from "../../src/frontend/components/Hero";
 import ScrollStack from "../../src/frontend/components/common/ScrollStack";
 import SEO from "../../src/frontend/components/SEO";

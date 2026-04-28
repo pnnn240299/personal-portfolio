@@ -5,7 +5,7 @@ import useDataCRUD from "@/lib/useDataCRUD";
 import { GetExternalLinks } from "@/types/external_links";
 
 export default function ExternalLinksManager() {
-  const { data, loading, error, fetchData } = useDataCRUD<GetExternalLinks>("external_links");
+  const { data, loading, error, fetchData } = useDataCRUD("external_links");
 
   if (loading) return <p className="p-6">⏳ Đang tải...</p>;
   if (error) return <p className="p-6 text-red-500">❌ Lỗi: {error.message}</p>;

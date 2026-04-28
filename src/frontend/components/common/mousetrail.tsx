@@ -1,6 +1,7 @@
 'use client';
 import { cn } from '../../lib/utils';
 import { createRef, useRef } from 'react';
+import Image from "next/image";
 export default function ImageMouseTrail({
   items,
   children,
@@ -65,7 +66,7 @@ export default function ImageMouseTrail({
     >
       {items.map((item, index) => (
         <>
-          <img
+          <Image
             key={index}
             className={cn(
               "object-cover  scale-0 opacity:0 data-[status='active']:scale-100  data-[status='active']:opacity-100 transition-transform data-[status='active']:duration-500 duration-300 data-[status='active']:ease-out-expo  absolute   -translate-y-[50%] -translate-x-[50%] ",
@@ -76,6 +77,8 @@ export default function ImageMouseTrail({
             src={item}
             alt={`image-${index}`}
             ref={refs.current[index]}
+            width={160}
+            height={192}
           />
         </>
       ))}

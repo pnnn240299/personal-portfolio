@@ -4,17 +4,21 @@ import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useState } from "react";
 import Card from "@/admin/components/card";
 import Link from "next/link";
+import Image from "next/image";
 
 const NewCard = (props: {
-  image: string;
+  image: any;
   name: string;
   description: string;
   technologies: { title: string; icon: string; url: string }[];
+  github?: string;
+  live?: string;
+  slug?: string;
   demoLink?: string;
   edit?: string;
   extra?: string;
 }) => {
-  const { name, image, description, technologies, demoLink, edit, extra } = props;
+  const { name, image, description, technologies, github, live, slug, demoLink, edit, extra } = props;
   const [heart, setHeart] = useState(false);
 
   return (
@@ -68,7 +72,7 @@ const NewCard = (props: {
                   rel="noopener noreferrer"
                   className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md shadow-sm transition-transform transform hover:scale-110"
                 >
-                  <img src={tech?.icon} alt={tech?.title} className="w-8 h-8" />
+                  <Image src={tech?.icon} alt={tech?.title} className="w-8 h-8" width={32} height={32} />
                 </a>
               ))}
             </div>

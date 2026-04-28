@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Dropdown from "@/admin/components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import Link from "next/link";
@@ -36,14 +36,14 @@ const Navbar = (props: {
           </a>
           <Link
             className="text-sm font-normal capitalize text-navy-700 hover:underline dark:text-white dark:hover:text-white"
-            to="#"
+            href="#"
           >
             {brandText}
           </Link>
         </div>
         <p className="shrink text-[33px] capitalize text-navy-700 dark:text-white">
           <Link
-            to="#"
+            href="#"
             className="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
           >
             {brandText}
@@ -164,12 +164,14 @@ const Navbar = (props: {
         <div
           className="cursor-pointer text-gray-600"
           onClick={() => {
-            if (darkmode) {
-              document.body.classList.remove("dark");
-              setDarkmode(false);
-            } else {
-              document.body.classList.add("dark");
-              setDarkmode(true);
+            if (typeof window !== 'undefined') {
+              if (darkmode) {
+                document.body.classList.remove("dark");
+                setDarkmode(false);
+              } else {
+                document.body.classList.add("dark");
+                setDarkmode(true);
+              }
             }
           }}
         >

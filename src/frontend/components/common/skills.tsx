@@ -2,6 +2,7 @@
 
 import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 import html from '@/frontend/assets/skills/html.svg'
 import css from '@/frontend/assets/skills/css.svg'
@@ -159,11 +160,13 @@ export default function Skills() {
                                         className="flex shrink-0 animate-logo-cloud flex-row justify-around gap-6"
                                    >
                                         {logos.map((logo, key) => (
-                                             <img
+                                             <Image
                                                   key={key}
                                                   src={logo.url}
                                                   className="h-10 w-28 px-2 "
                                                   alt={`${logo.name}`}
+                                                  width={112}
+                                                  height={40}
                                              />
                                         ))}
                                    </div>

@@ -1,43 +1,38 @@
-import { generateColumns } from "@/admin/components/table/generateColumns";
-import { GetExternalLinks } from "@/types/external_links";
+import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
-const columnConfig = [
+export const columns: ColumnDef<any, any>[] = [
   {
-    accessor: "title",
+    accessorKey: "title",
     header: "Title",
-    cell: (data: any) => <p className="text-sm font-bold">{data.getValue()}</p>,
+    cell: (info) => <p className="text-sm font-bold">{info.getValue()}</p>,
   },
   {
-    accessor: "icon",
+    accessorKey: "icon",
     header: "Icon",
-    cell: (data: any) => (
+    cell: (info) => (
       <img
-        src={data.getValue()}
+        src={info.getValue()}
         alt="icon"
         className="w-8 h-8 object-contain"
       />
     ),
   },
   {
-    accessor: "url",
+    accessorKey: "url",
     header: "Url",
-    cell: (data: any) => <span>{data.getValue()}</span>,
+    cell: (info) => <span>{info.getValue()}</span>,
   },
   {
-    accessor: "id",
+    accessorKey: "id",
     header: "Action",
-    cell: (data: any) => <span>
+    cell: (info) => (
       <Link
-        href={`/admin/external_link/edit/${data.getValue()}`}
+        href={`/admin/external_link/edit/${info.getValue()}`}
         className="text-blue-500 text-sm hover:underline"
       >
         Chỉnh sửa
       </Link>
-    </span>,
+    ),
   },
 ];
-
-export const columns = generateColumns<GetExternalLinks>({
-  columns: columnConfig
-});

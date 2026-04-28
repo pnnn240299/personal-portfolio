@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/frontend/components/ui/button"
 import { motion } from "framer-motion"
 import self from '@/frontend/assets/images/self.svg'
+import Image from "next/image"
 
 export default function AboutUs() {
      return (
@@ -11,11 +12,13 @@ export default function AboutUs() {
                <div className="max-w-6xl mx-auto w-full  flex flex-col-reverse items-center justify-between md:flex-row gap-12 mt-4">
                     <div className="w-full md:w-1/2">
                          <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
-                              <img
+                              <Image
                                    src={self}
                                    alt="Developer portrait"
                                    className="w-full h-full object-cover object-center "
                                    loading="lazy"
+                                   width={500}
+                                   height={500}
                               />
                          </div>
                     </div>

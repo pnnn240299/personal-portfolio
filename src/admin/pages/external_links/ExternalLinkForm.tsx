@@ -34,7 +34,7 @@ const ExternalLinkForm = () => {
     } else {
       await createItem(formData);
     }
-    navigate("/admin/external_link");
+    router.push("/admin/external_link");
   };
 
   return (

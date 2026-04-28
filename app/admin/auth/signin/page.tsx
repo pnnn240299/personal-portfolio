@@ -1,13 +1,15 @@
 'use client'
 
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from 'next/dynamic';
 import InputField from "@/admin/components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";
 import Checkbox from "@/admin/components/checkbox";
 import { useAuth } from "@/admin/contexts/AuthContext";
 
-export default function SignIn() {
+function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
@@ -141,3 +143,7 @@ export default function SignIn() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(SignIn), { 
+  ssr: false 
+});

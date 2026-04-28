@@ -28,7 +28,8 @@ export default function mysqlProvider(table) {
         `INSERT INTO ${table} SET ?`,
         [data]
       );
-      return { id: result.insertId, ...data };
+      const insertId = (result as any).insertId;
+      return { id: insertId, ...data };
     },
 
     async updateItem(id, data) {

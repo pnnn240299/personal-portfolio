@@ -1,14 +1,8 @@
 # Migration giống Laravel cho Next.js
 
-Hệ thống migration này giúp bạn tạo, chạy và rollback migration giống Laravel, dùng PostgreSQL/pg trong Node.
+Hệ thống migration này giúp bạn tạo, chạy và rollback migration giống Laravel.
 
 ## Cài đặt
-
-1. Cài biến môi trường kết nối:
-
-```bash
-DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
-```
 
 2. Cài dependency nếu chưa có:
 

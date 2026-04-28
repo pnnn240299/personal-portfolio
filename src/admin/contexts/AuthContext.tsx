@@ -1,6 +1,7 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import * as React from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface AdminUser {
@@ -39,9 +40,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for existing session on mount
   useEffect(() => {
-    const storedUser = localStorage.getItem('adminUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('adminUser');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
     }
     setIsLoading(false);
   }, []);
@@ -65,7 +68,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       const adminUser = await response.json();
       setUser(adminUser);
-      localStorage.setItem("adminUser", JSON.stringify(adminUser));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem("adminUser", JSON.stringify(adminUser));
+      }
       return true;
     } catch (error) {
       console.error("Login error:", error);
@@ -77,7 +82,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('adminUser');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('adminUser');
+    }
     router.push('/admin/auth/sign-in');
   };
 

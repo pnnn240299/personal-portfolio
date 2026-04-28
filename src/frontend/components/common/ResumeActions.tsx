@@ -166,7 +166,6 @@ Thank you for taking the time to learn about me and my work. If you’d like to 
                const newDirection = newTabId > activeTab ? 1 : -1
                setDirection(newDirection)
                setActiveTab(newTabId)
-               playClickSound()
           }
      }
 

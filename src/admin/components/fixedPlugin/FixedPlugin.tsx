@@ -2,25 +2,27 @@
 
 // Chakra Imports
 // Custom Icons
-import React from "react";
+import * as React from "react";
 
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
 export default function FixedPlugin(props: { [s: string]: any }) {
   const { ...rest } = props;
   const [darkmode, setDarkmode] = React.useState(
-    document.body.classList.contains("dark")
+    typeof window !== 'undefined' ? document.body.classList.contains("dark") : false
   );
 
   return (
     <button
       className="border-px fixed bottom-[30px] right-[35px] !z-[99] flex h-[60px] w-[60px] items-center justify-center rounded-full border-[#6a53ff] bg-gradient-to-br from-brandLinear to-blueSecondary p-0"
       onClick={() => {
-        if (darkmode) {
-          document.body.classList.remove("dark");
-          setDarkmode(false);
-        } else {
-          document.body.classList.add("dark");
-          setDarkmode(true);
+        if (typeof window !== 'undefined') {
+          if (darkmode) {
+            document.body.classList.remove("dark");
+            setDarkmode(false);
+          } else {
+            document.body.classList.add("dark");
+            setDarkmode(true);
+          }
         }
       }}
       {...rest}

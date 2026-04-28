@@ -1,11 +1,13 @@
+'use client'
+
 import DefaultTable from "@/admin/components/table/DefaultTable";
 import { columns } from "@/admin/pages/external_links/variables/columns";
 import Link from "next/link";
 import useDataCRUD from "@/lib/useDataCRUD";
 import { GetExternalLinks } from "@/types/external_links";
 
-export default function ExternalLinksManager() {
-  const { data, loading, error, fetchData } = useDataCRUD<GetExternalLinks>("external_links");
+function ExternalLinksManager() {
+  const { data, loading, error, fetchData } = useDataCRUD("external_links");
 
   if (loading) return <p className="p-6">⏳ Đang tải...</p>;
   if (error) return <p className="p-6 text-red-500">❌ Lỗi: {error.message}</p>;
@@ -32,3 +34,5 @@ export default function ExternalLinksManager() {
     </div>
   );
 }
+
+export default ExternalLinksManager;

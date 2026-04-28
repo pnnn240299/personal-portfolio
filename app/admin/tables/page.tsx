@@ -1,3 +1,5 @@
+'use client'
+
 import tableDataDevelopment from "@/admin/pages/tables/variables/tableDataDevelopment";
 import tableDataCheck from "@/admin/pages/tables/variables/tableDataCheck";
 import CheckTable from "@/admin/pages/tables/components/CheckTable";
@@ -7,7 +9,7 @@ import DevelopmentTable from "@/admin/pages/tables/components/DevelopmentTable";
 import ColumnsTable from "@/admin/pages/tables/components/ColumnsTable";
 import ComplexTable from "@/admin/pages/tables/components/ComplexTable";
 
-const Tables = () => {
+function Tables() {
   return (
     <div>
       <div className="mt-5 grid h-full grid-cols-1 gap-5 md:grid-cols-2">

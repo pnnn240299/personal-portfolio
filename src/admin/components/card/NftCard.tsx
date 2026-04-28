@@ -5,10 +5,10 @@ import { useState } from "react";
 import Card from "@/admin/components/card";
 
 const NftCard = (props: {
-  image: string;
+  image: any;
   title: string;
   author: string;
-  bidders: string[];
+  bidders: any[];
   download?: string;
   price: string | number;
   extra?: string;

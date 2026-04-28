@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { RevealLinks } from "../../../src/frontend/components/common/RevealLinks";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { ReactLenis } from 'lenis/react';
 import SEO from "../../../src/frontend/components/SEO";
+import Image from "next/image";
 
 export default function ContactPage() {
   useEffect(() => {
@@ -98,7 +99,7 @@ export default function ContactPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-center"
               >
-                <img
+                <Image
                   src={shakehand}
                   alt="Handshake"
                   className="w-full max-w-md mx-auto mb-8"

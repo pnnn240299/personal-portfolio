@@ -1,3 +1,5 @@
+'use client'
+
 import MiniCalendar from "../../src/admin/components/calendar/MiniCalendar";
 import WeeklyRevenue from "../../src/admin/pages/default/components/WeeklyRevenue";
 import TotalSpent from "../../src/admin/pages/default/components/TotalSpent";
@@ -14,7 +16,7 @@ import TaskCard from "../../src/admin/pages/default/components/TaskCard";
 import tableDataCheck from "../../src/admin/pages/default/variables/tableDataCheck";
 import tableDataComplex from "../../src/admin/pages/default/variables/tableDataComplex";
 
-const Dashboard = () => {
+function Dashboard() {
   return (
     <div>
       {/* Card widget */}

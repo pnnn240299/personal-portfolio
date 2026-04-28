@@ -1,3 +1,5 @@
+'use client'
+
 import Banner from "@/admin/pages/profile/components/Banner";
 import General from "@/admin/pages/profile/components/General";
 import Notification from "@/admin/pages/profile/components/Notification";

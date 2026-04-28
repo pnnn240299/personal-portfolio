@@ -1,13 +1,13 @@
 'use client'
 
 /* eslint-disable */
-import React from "react";
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DashIcon from "@/admin/components/icons/DashIcon";
 // chakra imports
 
-export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
+export const SidebarLinks = (props: { routes: any[] }): JSX.Element => {
   // Chakra color mode
   let location = usePathname();
 

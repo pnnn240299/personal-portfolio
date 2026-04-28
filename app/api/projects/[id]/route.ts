@@ -3,10 +3,11 @@ import { projectsService } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const project = await projectsService.getProjectById(params.id);
+    const { id } = await params;
+    const project = await projectsService.getProjectById(id);
     if (!project) {
       return NextResponse.json({ error: 'Project not found' }, { status: 404 });
     }
@@ -19,11 +20,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const updatedProject = await projectsService.updateProject(params.id, body);
+    const updatedProject = await projectsService.updateProject(id, body);
     return NextResponse.json(updatedProject);
   } catch (error) {
     console.error('Error updating project:', error);
@@ -33,10 +35,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await projectsService.deleteProject(params.id);
+    const { id } = await params;
+    await projectsService.deleteProject(id);
     return NextResponse.json({ message: 'Project deleted' });
   } catch (error) {
     console.error('Error deleting project:', error);

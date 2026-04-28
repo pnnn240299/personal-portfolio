@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import * as React from "react";
 import CardMenu from "@/admin/components/card/CardMenu";
 import Card from "@/admin/components/card";
 import {

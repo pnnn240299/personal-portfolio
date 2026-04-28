@@ -36,7 +36,8 @@
 
 'use client'
 
-import React, { useEffect } from "react";
+import * as React from "react";
+import { useEffect } from "react";
 import { ReactLenis } from "lenis/react";
 import AboutUs from "./aboutus";
 import Projects from "./project";
@@ -44,7 +45,7 @@ import Skills from "./skills";
 import Experience from "./experience";
 import { RevealLinks } from "./RevealLinks";
 
-export default function ScrollStack({ onSectionChange }) {
+export default function ScrollStack({ onSectionChange }: { onSectionChange?: (sectionId: string) => void }) {
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section');

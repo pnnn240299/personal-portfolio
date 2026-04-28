@@ -12,7 +12,7 @@ const AnimatedShinyText = ({
                style={
                     {
                          '--shimmer-width': `${shimmerWidth}px`,
-                    }
+                    } as React.CSSProperties
                }
                className={cn(
                     'mx-auto max-w-md text-neutral-600/50 dark:text-neutral-400/50 ',

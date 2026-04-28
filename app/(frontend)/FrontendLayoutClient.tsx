@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 import LocomotiveScroll from 'locomotive-scroll'
 import Navbar from '@/frontend/components/Navbar'
 import { ResumeActions } from '@/frontend/components/common/ResumeActions'
@@ -9,10 +10,7 @@ export default function FrontendLayoutClient({ children }: { children: React.Rea
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector('[data-scroll-container]') as HTMLElement,
-      smooth: true,
-    })
+    const scroll = new LocomotiveScroll({})
 
     return () => scroll.destroy()
   }, [])

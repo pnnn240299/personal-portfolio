@@ -1,6 +1,7 @@
 import avatar from "@/admin/assets/img/avatars/avatar11.png";
 import banner from "@/admin/assets/img/profile/banner.png";
 import Card from "@/admin/components/card";
+import Image from "next/image";
 
 const Banner = () => {
   return (
@@ -11,7 +12,7 @@ const Banner = () => {
         style={{ backgroundImage: `url(${banner})` }}
       >
         <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
-          <img className="h-full w-full rounded-full" src={avatar} alt="" />
+          <Image className="h-full w-full rounded-full" src={avatar} alt="" width={87} height={87} />
         </div>
       </div>
 

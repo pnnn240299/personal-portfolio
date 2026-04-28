@@ -2,7 +2,7 @@
 
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 
 const navLinks = [

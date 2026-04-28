@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 const Settings = () => {
   // Mock dữ liệu settings
@@ -13,14 +14,17 @@ const Settings = () => {
 
   useEffect(() => {
     // Giả sử lấy dữ liệu từ API hoặc local storage
-    const savedSettings = JSON.parse(localStorage.getItem("settings") || "{}");
-    if (Object.keys(savedSettings).length > 0) {
-      setSettings(savedSettings);
+    if (typeof window !== 'undefined') {
+      const savedSettings = JSON.parse(localStorage.getItem("settings") || "{}");
+      if (Object.keys(savedSettings).length > 0) {
+        setSettings(savedSettings);
+      }
     }
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
+    const target = e.target as any;
+    const { name, value, type, checked } = target;
     setSettings((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -29,8 +33,10 @@ const Settings = () => {
 
   const handleSave = () => {
     // Lưu settings vào local storage hoặc gọi API lưu vào database
-    localStorage.setItem("settings", JSON.stringify(settings));
-    alert("Settings saved successfully!");
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("settings", JSON.stringify(settings));
+      alert("Settings saved successfully!");
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import * as React from "react";
 import { motion } from "framer-motion";
 import noiseImage from '@/frontend/assets/images/black-noise.png'
 

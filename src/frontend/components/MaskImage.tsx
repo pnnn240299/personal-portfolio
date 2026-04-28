@@ -3,7 +3,8 @@
 
 'use client'
 
-import React from 'react';
+import * as React from 'react';
+import Image from "next/image";
 
 interface MaskImageProps {
   src: string;
@@ -28,10 +29,11 @@ const MaskImage: React.FC<MaskImageProps> = ({ src, alt = '', className = '' }) 
           maskSize: 'contain',
           WebkitMaskSize: 'contain',
         }}>
-        <img
+        <Image
           src={src}
           alt={alt}
           className="w-full h-full object-cover aspect-square hover:scale-105 transition-all duration-300"
+          fill
         />
       </section>
     </>

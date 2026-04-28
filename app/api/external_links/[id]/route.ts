@@ -3,10 +3,11 @@ import { externalLinksService } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const link = await externalLinksService.getLinkById(params.id);
+    const { id } = await params;
+    const link = await externalLinksService.getLinkById(id);
     if (!link) {
       return NextResponse.json({ error: 'External link not found' }, { status: 404 });
     }
@@ -19,11 +20,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const updatedLink = await externalLinksService.updateLink(params.id, body);
+    const updatedLink = await externalLinksService.updateLink(id, body);
     return NextResponse.json(updatedLink);
   } catch (error) {
     console.error('Error updating external link:', error);
@@ -33,10 +35,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await externalLinksService.deleteLink(params.id);
+    const { id } = await params;
+    await externalLinksService.deleteLink(id);
     return NextResponse.json({ message: 'External link deleted' });
   } catch (error) {
     console.error('Error deleting external link:', error);

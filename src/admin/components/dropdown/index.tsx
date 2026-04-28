@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import * as React from "react";
 
 function useOutsideAlerter(ref: any, setX: any): void {
   React.useEffect(() => {
@@ -14,11 +14,14 @@ function useOutsideAlerter(ref: any, setX: any): void {
       }
     }
     // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    if (typeof window !== 'undefined') {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+    return () => {};
   }, [ref, setX]);
 }
 

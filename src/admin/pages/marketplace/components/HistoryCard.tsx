@@ -7,46 +7,47 @@ import Nft6 from "@/admin/assets/img/nfts/Nft6.png";
 
 import { FaEthereum } from "react-icons/fa";
 import Card from "@/admin/components/card";
+import Image from "next/image";
 
 const HistoryCard = () => {
   const HistoryData = [
     {
-      image: Nft1,
+      image: Nft1 as any,
       title: "Colorful Heaven",
       owner: "Mark Benjamin",
       price: 0.4,
       time: "30s",
     },
     {
-      image: Nft2,
+      image: Nft2 as any,
       title: "Abstract Colors",
       owner: "Esthera Jackson",
       price: 2.4,
       time: "50m",
     },
     {
-      image: Nft3,
+      image: Nft3 as any,
       title: "ETH AI Brain",
       owner: "Nick Wilson",
       price: 0.3,
       time: "20s",
     },
     {
-      image: Nft4,
+      image: Nft4 as any,
       title: "Swipe Circles",
       owner: " Peter Will",
       price: 0.4,
       time: "4h",
     },
     {
-      image: Nft5,
+      image: Nft5 as any,
       title: "Mesh Gradients",
       owner: "Will Smith",
       price: 0.4,
       time: "30s",
     },
     {
-      image: Nft6,
+      image: Nft6 as any,
       title: "3D Cubes Art",
       owner: " Manny Gates",
       price: 0.4,
@@ -72,10 +73,12 @@ const HistoryCard = () => {
         <div className="flex h-full w-full items-start justify-between bg-white px-3 py-[20px] hover:shadow-2xl dark:!bg-navy-800 dark:shadow-none dark:hover:!bg-navy-700">
           <div className="flex items-center gap-3">
             <div className="flex h-16 w-16 items-center justify-center">
-              <img
+              <Image
                 className="h-full w-full rounded-xl"
                 src={data.image}
                 alt=""
+                width={64}
+                height={64}
               />
             </div>
             <div className="flex flex-col">

@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 const About = () => {
   const [aboutData, setAboutData] = useState({
@@ -11,9 +12,11 @@ const About = () => {
 
   useEffect(() => {
     // Lấy dữ liệu từ localStorage hoặc API
-    const savedData = JSON.parse(localStorage.getItem("aboutPage") || "{}");
-    if (Object.keys(savedData).length > 0) {
-      setAboutData(savedData);
+    if (typeof window !== 'undefined') {
+      const savedData = JSON.parse(localStorage.getItem("aboutPage") || "{}");
+      if (Object.keys(savedData).length > 0) {
+        setAboutData(savedData);
+      }
     }
   }, []);
 
@@ -26,15 +29,17 @@ const About = () => {
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
+    if (e.target.files?.[0] && typeof window !== 'undefined') {
       const imageUrl = URL.createObjectURL(e.target.files[0]);
       setAboutData((prev) => ({ ...prev, image: imageUrl }));
     }
   };
 
   const handleSave = () => {
-    localStorage.setItem("aboutPage", JSON.stringify(aboutData));
-    alert("About page updated successfully!");
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("aboutPage", JSON.stringify(aboutData));
+      alert("About page updated successfully!");
+    }
   };
 
   return (

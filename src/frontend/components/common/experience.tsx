@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import starIcon from '@/frontend/assets/skills/star.svg'
 import reactIcon from '@/frontend/assets/skills/react.svg'
 import NextIcon from '@/frontend/assets/skills/next.svg'
+import Image from "next/image"
 
 const experiences = [
   {
@@ -53,7 +54,7 @@ export default function Experience() {
                 <div className="lg:col-span-4 ">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-500 group-hover:bg-gray-900 text-black transition-colors duration-300">
-                      <img src={experience.icon} alt="" />
+                      <Image src={experience.icon} alt="" width={48} height={48} />
                     </div>
                     <div>
                       <h3 className="text-2xl font- ">{experience.title}</h3>

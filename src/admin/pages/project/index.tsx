@@ -5,12 +5,11 @@ import Link from "next/link";
 import useDataCRUD from "../../../lib/useDataCRUD";
 import projectModel from "@/models/supabaseQuery/project.js";
 import { GetProjects } from "@/types/projects";
-import CreateLinkButton from "@/admin/components/buttons/CreateLinkButton";
 import { ButtonLink } from "@/admin/components/buttons/ButtonLink";
 import { HiPlus } from "react-icons/hi";
 const Project = () => {
 
-  const { data, loading, error, fetchData } = useDataCRUD<GetProjects>("projects", projectModel);
+  const { data, loading, error, fetchData } = useDataCRUD("projects");
 
   if (loading) return <p>⏳ Đang tải...</p>;
   if (error) return <p>❌ Lỗi: {error.message}</p>;

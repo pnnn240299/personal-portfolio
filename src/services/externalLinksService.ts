@@ -15,7 +15,7 @@ class ExternalLinksService {
     try {
       const links = await this.provider.fetchData();
       // Business logic: sort, filter, format, etc.
-      return links;
+      return links as ExternalLink[];
     } catch (error) {
       throw new Error(`Failed to fetch external links: ${error}`);
     }

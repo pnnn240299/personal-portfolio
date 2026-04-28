@@ -4,14 +4,20 @@ import Card from "@/admin/components/card";
 import { useState } from "react";
 import SocialLinks from "./SocialLinks";
 import { FaFacebook, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import Image from "next/image";
 
-const Banner = () => {
+const Banner = ({ socialLinks }: { socialLinks?: any }) => {
   const [profile, setProfile] = useState({
     name: "Pham Nguyen Ngoc Nhan",
     email: "nhan@example.com",
     avatar: avatar,
     role: "Product Manager",
-    socialLinks: [
+    socialLinks: socialLinks ? [
+      { platform: "Facebook", url: socialLinks.facebook, icon: <FaFacebook size={24} /> },
+      { platform: "Twitter", url: socialLinks.twitter, icon: <FaTwitter size={24} /> },
+      { platform: "LinkedIn", url: socialLinks.linkedin, icon: <FaLinkedin size={24} /> },
+      { platform: "GitHub", url: socialLinks.github, icon: <FaGithub size={24} /> },
+    ] : [
       { platform: "Facebook", url: "https://facebook.com/nhan", icon: <FaFacebook size={24} /> },
       { platform: "Twitter", url: "https://twitter.com/nhan", icon: <FaTwitter size={24} /> },
       { platform: "LinkedIn", url: "https://linkedin.com/in/nhan", icon: <FaLinkedin size={24} /> },
@@ -24,10 +30,16 @@ const Banner = () => {
       {/* Background and profile */}
       <div
         className="relative mt-1 flex h-32 w-full justify-center rounded-xl bg-cover"
-        style={{ backgroundImage: `url(${banner})` }}
+        style={{ backgroundImage: `url(${banner as any})` }}
       >
         <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
-          <img className="h-full w-full rounded-full" src={profile.avatar} alt="" />
+          <Image
+          className="h-full w-full rounded-full"
+          src={profile.avatar}
+          alt=""
+          width={87}
+          height={87}
+        />
         </div>
       </div>
 

@@ -4,13 +4,14 @@ import pool from '@/lib/mysqlClient'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const connection = await pool.getConnection()
     const [rows] = await connection.execute(
       'SELECT id, username, email, created_at, updated_at FROM admin_users WHERE id = ?',
-      [params.id]
+      [id]
     )
     connection.release()
 
@@ -33,9 +34,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { username, email, password } = body
 
@@ -57,7 +59,7 @@ export async function PUT(
     }
 
     updateQuery += ' WHERE id = ?'
-    updateParams.push(params.id)
+    updateParams.push(id)
 
     const [result] = await connection.execute(updateQuery, updateParams)
     connection.release()
@@ -71,7 +73,7 @@ export async function PUT(
 
     const { password: _, ...adminData } = body
 
-    return NextResponse.json({ id: params.id, ...adminData })
+    return NextResponse.json({ id, ...adminData })
   } catch (error) {
     console.error('Error updating admin user:', error)
     return NextResponse.json(
@@ -83,13 +85,14 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const connection = await pool.getConnection()
     const [result] = await connection.execute(
       'DELETE FROM admin_users WHERE id = ?',
-      [params.id]
+      [id]
     )
     connection.release()
 

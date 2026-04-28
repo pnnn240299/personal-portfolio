@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import CardMenu from "@/admin/components/card/CardMenu";
 import { DiApple } from "react-icons/di";
 import { DiAndroid } from "react-icons/di";

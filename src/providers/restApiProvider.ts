@@ -11,9 +11,9 @@ export default function restApiProvider(table) {
   };
 
   return {
-    fetchData: async () => request(baseUrl),
+    fetchData: async () => request(baseUrl, {}),
 
-    getItem: async (id) => request(`${baseUrl}/${id}`),
+    getItem: async (id) => request(`${baseUrl}/${id}`, {}),
 
     createItem: async (data) =>
       request(baseUrl, {

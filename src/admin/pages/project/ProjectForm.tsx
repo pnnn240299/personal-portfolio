@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import useFormState from "@/hooks/useFormState";
 import useDataCRUD from "@/lib/useDataCRUD";
 import Editor from "./components/BasicEditor.jsx";
@@ -9,7 +9,8 @@ import { GetExternalLinks } from "@/types/external_links";
 
 const ProjectForm = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
     const isEditing = !!id;
 
   const {
@@ -19,11 +20,11 @@ const ProjectForm = () => {
     getItem: getProject,
     loading,
     error,
-  } = useDataCRUD("projects", projectModel);
+  } = useDataCRUD("projects");
 
   const {
     data: allExternalLinks = [],
-  } = useDataCRUD<GetExternalLinks>("external_links");
+  } = useDataCRUD("external_links");
 
   const {
     createItem: addExternalLinks,
@@ -31,13 +32,15 @@ const ProjectForm = () => {
   } = useDataCRUD("project_external_links");
 
   const { formData, setFormData, handleChange, setField } = useFormState({
-    name: "",
-    skill: "",
-    description: "",
-    repo_url: "",
-    image_url: "",
-    live_url: "",
-    external_links: [],
+    initialValues: {
+      name: "",
+      skill: "",
+      description: "",
+      repo_url: "",
+      image_url: "",
+      live_url: "",
+      external_links: [],
+    }
   });
 
   // Load dữ liệu project khi edit
@@ -58,8 +61,9 @@ const ProjectForm = () => {
 
   // Xử lý cập nhật project + external_links
   const handleSave = async () => {
-    const { external_links, ...projectFields } = formData;
-    const selectedLinkIds = external_links.map(link => link.id);
+    const formDataAny = formData as any;
+    const { external_links, ...projectFields } = formDataAny;
+    const selectedLinkIds = external_links?.map((link: any) => link.id) || [];
 
     const savedProject = isEditing
       ? await updateProject(id, projectFields)
@@ -106,7 +110,7 @@ const ProjectForm = () => {
         <input
           type="text"
           name="name"
-          value={formData.name}
+          value={(formData as any).name}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
         />
@@ -115,7 +119,7 @@ const ProjectForm = () => {
         <label className="block text-sm font-medium text-gray-700">Mô tả ngắn</label>
         <textarea
           name="description"
-          value={formData.description}
+          value={(formData as any).description}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
         />
@@ -125,7 +129,7 @@ const ProjectForm = () => {
         <input
           type="text"
           name="image_url"
-          value={formData.image_url}
+          value={(formData as any).image_url}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
         />
@@ -135,7 +139,7 @@ const ProjectForm = () => {
         <input
           type="text"
           name="live_url"
-          value={formData.live_url}
+          value={(formData as any).live_url}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
         />
@@ -144,14 +148,14 @@ const ProjectForm = () => {
         <label className="block text-sm font-medium text-gray-700">Skills</label>
         <textarea
           name="skill"
-          value={formData.skill}
+          value={(formData as any).skill}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
         />
 
         {/* Repo */}
         <label className="block text-sm font-medium text-gray-700">Repo</label>
-        <Editor value={formData.repo_url} onChange={(value) => setField("repo_url", value)} />
+        <Editor value={(formData as any).repo_url} onChange={(value) => setField("repo_url", value)} />
 
         {/* External Links */}
         <label className="block text-sm font-medium text-gray-700 mt-4">External Links</label>
@@ -160,7 +164,7 @@ const ProjectForm = () => {
           name="external_links"
           options={externalLinkOptions}
           value={externalLinkOptions.filter(opt =>
-            formData.external_links.some(link => link.id === opt.value)
+            (formData as any).external_links?.some((link: any) => link.id === opt.value)
           )}
           onChange={(selectedOptions) => {
             const selectedLinks = allExternalLinks.filter(link =>

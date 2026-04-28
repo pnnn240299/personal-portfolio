@@ -3,10 +3,11 @@ import { blogsService } from '@/services';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const blog = await blogsService.getBlogBySlug(params.slug);
+    const { slug } = await params;
+    const blog = await blogsService.getBlogBySlug(slug);
     if (!blog) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }
@@ -19,11 +20,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    const { slug } = await params;
     const body = await request.json();
-    const updatedBlog = await blogsService.updateBlog(params.slug, body);
+    const updatedBlog = await blogsService.updateBlog(slug, body);
     return NextResponse.json(updatedBlog);
   } catch (error) {
     console.error('Error updating blog:', error);
@@ -33,10 +35,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    await blogsService.deleteBlog(params.slug);
+    const { slug } = await params;
+    await blogsService.deleteBlog(slug);
     return NextResponse.json({ message: 'Blog deleted' });
   } catch (error) {
     console.error('Error deleting blog:', error);

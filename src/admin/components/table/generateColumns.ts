@@ -20,7 +20,13 @@ export function generateColumns<T extends BaseRow>({
   const helper = createColumnHelper<T>();
 
   return columns.map((col) => {
-    return helper.accessor(col.accessor as keyof T, {
+    if (col.accessor) {
+      return helper.accessor((row: T) => row[col.accessor as keyof T], {
+        header: col.header,
+        cell: col.cell,
+      });
+    }
+    return helper.display({
       header: col.header,
       cell: col.cell,
     });

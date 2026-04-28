@@ -18,7 +18,7 @@ class BlogsService {
     try {
       const blogs = await this.provider.fetchData();
       // Business logic: sort, filter, format, etc.
-      return blogs.sort((a: Blog, b: Blog) => 
+      return (blogs as Blog[]).sort((a: Blog, b: Blog) => 
         new Date(b.date || '').getTime() - new Date(a.date || '').getTime()
       );
     } catch (error) {

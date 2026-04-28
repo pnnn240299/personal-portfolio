@@ -1,6 +1,7 @@
-import React from "react";
+import * as React from "react";
 import Progress from "@/admin/components/progress";
 import Card from "@/admin/components/card";
+import Image from "next/image";
 
 import {
   createColumnHelper,
@@ -29,10 +30,12 @@ function CheckTable(props: { tableData: any }) {
       cell: (info: any) => (
         <div className="flex items-center gap-2">
           <div className="h-[30px] w-[30px] rounded-full">
-            <img
+            <Image
               src={info.getValue()[1]}
               className="h-full w-full rounded-full"
               alt=""
+              width={30}
+              height={30}
             />
           </div>
           <p className="text-sm font-medium text-navy-700 dark:text-white">

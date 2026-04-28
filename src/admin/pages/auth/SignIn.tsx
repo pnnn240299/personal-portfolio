@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import InputField from "@/admin/components/fields/InputField";
 import { FcGoogle } from "react-icons/fc";

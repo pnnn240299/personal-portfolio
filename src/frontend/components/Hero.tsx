@@ -34,6 +34,7 @@ export default function Hero() {
   return (
     <div className="relative min-h-[90vh] flex items-center">
       <ImageMouseTrail
+        className="w-full h-full"
         items={images}
         maxNumberOfImages={8}
         distance={25}

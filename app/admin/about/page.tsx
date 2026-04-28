@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import dynamic from 'next/dynamic';
 
 const About = () => {
   const [aboutData, setAboutData] = useState({
@@ -106,4 +108,6 @@ const About = () => {
   );
 };
 
-export default About;
+export default dynamic(() => Promise.resolve(About), { 
+  ssr: false 
+});

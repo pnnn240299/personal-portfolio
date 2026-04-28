@@ -21,7 +21,7 @@ class ProjectsService {
     try {
       const projects = await this.provider.fetchData();
       // Business logic: sort, filter, format, etc.
-      return projects.sort((a: Project, b: Project) => b.id - a.id);
+      return (projects as Project[]).sort((a: Project, b: Project) => b.id - a.id);
     } catch (error) {
       throw new Error(`Failed to fetch projects: ${error}`);
     }

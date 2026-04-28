@@ -118,14 +118,17 @@ export default function Projects() {
                                         <h2 className="text-xl md:text-3xl lg:text-3xl font-light group-hover:text-green-500 transition-colors duration-300">
                                              {image.description}
                                         </h2>
-                                        <Link
-                                             href={`/projects/${image.slug}`}
-                                             className="inline-flex items-center text-green-500 hover:text-green-400 transition-colors"
+                                        <motion.div
                                              whileHover={{ x: 5 }}
                                              transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                         >
-                                             <span className=''>View Project</span> <ArrowRight className="ml-2 h-4 w-4" />
-                                        </Link>
+                                             <Link
+                                                  href={`/projects/${image.slug}`}
+                                                  className="inline-flex items-center text-green-500 hover:text-green-400 transition-colors"
+                                             >
+                                                  <span className=''>View Project</span> <ArrowRight className="ml-2 h-4 w-4" />
+                                             </Link>
+                                        </motion.div>
                                    </div>
                               </motion.div>
                          ))}

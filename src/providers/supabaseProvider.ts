@@ -1,11 +1,11 @@
 import supabase from "../lib/supabaseClient";
 
-export const supabaseProvider = (tableName, options = {}) => {
+export const supabaseProvider = (tableName, options: any = {}) => {
     const { select = "*", filters = [], order = {} } = options;
 
     return {
         fetchData: async () => {
-            let query = supabase.from(tableName).select(select);
+            let query = (supabase.from(tableName).select(select) as any);
             filters.forEach((f) => {
                 query = query.eq(f.column, f.value);
             });
@@ -38,8 +38,8 @@ export const supabaseProvider = (tableName, options = {}) => {
             return data[0];
         },
 
-        deleteItem: async (id, field) => {
-            const { error } = await supabase.from(tableName).delete().eq(field, id);
+        deleteItem: async (id, field = "id") => {
+            const { error } = await (supabase.from(tableName).delete().eq(field, id) as any);
             if (error) throw error;
             return true;
         },

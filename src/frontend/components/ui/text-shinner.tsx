@@ -1,5 +1,6 @@
 'use client';
-import React, { useMemo } from 'react';
+import * as React from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
@@ -18,7 +19,7 @@ export function TextShimmer({
      }, [children, spread]);
 
      return (
-          <MotionComponent
+          <motion.div
                className={cn(
                     'relative inline-block bg-[length:250%_100%,auto] bg-clip-text',
                     'text-transparent [--base-color:#a1a1aa] [--base-gradient-color:#000]',
@@ -37,10 +38,10 @@ export function TextShimmer({
                     {
                          '--spread': `${dynamicSpread}px`,
                          backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
-                    }
+                    } as any
                }
           >
                {children}
-          </MotionComponent>
+          </motion.div>
      );
 }

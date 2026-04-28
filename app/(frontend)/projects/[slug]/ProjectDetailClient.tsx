@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import FuzzyOverlay from '@/frontend/components/FuzzyOverlay';
 import type { Project } from '@/services';

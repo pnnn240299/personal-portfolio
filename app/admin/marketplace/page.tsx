@@ -1,3 +1,5 @@
+'use client'
+
 import Banner from "@/admin/pages/marketplace/components/Banner";
 import NFt2 from "@/admin/assets/img/nfts/Nft2.png";
 import NFt4 from "@/admin/assets/img/nfts/Nft4.png";
