@@ -14,7 +14,8 @@ const Checkbox = (props: {
     | "purple"
     | "amber"
     | "indigo"
-    | "gray";
+    | "gray"
+    | "brand";
   [x: string]: any;
 }) => {
   const { extra, color, ...rest } = props;
@@ -52,6 +53,8 @@ const Checkbox = (props: {
           ? "checked:border-none checked:bg-indigo-500 dark:checked:bg-indigo-400"
           : color === "gray"
           ? "checked:border-none checked:bg-gray-500 dark:checked:bg-gray-400"
+          : color === "brand"
+          ? "checked:bg-brand-500 dark:checked:bg-brand-400"
           : "checked:bg-brand-500 dark:checked:bg-brand-400"
       } ${extra}`}
       name="weekly"

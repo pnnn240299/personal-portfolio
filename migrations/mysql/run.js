@@ -4,7 +4,11 @@ import dotenv from "dotenv";
 import mysql from "mysql2/promise";
 import { fileURLToPath } from "url";
 
-dotenv.config();
+// Load .env.local first, then fallback to .env
+dotenv.config({ path: '.env.local' });
+if (!process.env.MYSQL_DATABASE) {
+  dotenv.config(); // Load .env as fallback
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +22,12 @@ const password = process.env.MYSQL_PASSWORD || "";
 const database = process.env.MYSQL_DATABASE;
 
 if (!database) {
-  console.error("❌ Missing MYSQL_DATABASE in .env. Please set it before running migrations.");
+  console.error("❌ Missing MYSQL_DATABASE in .env or .env.local. Please set it before running migrations.");
+  console.error("💡 Create .env.local file with:");
+  console.error("   MYSQL_HOST=localhost");
+  console.error("   MYSQL_USER=root");
+  console.error("   MYSQL_PASSWORD=your_password");
+  console.error("   MYSQL_DATABASE=portfolio_db");
   process.exit(1);
 }
 
@@ -83,8 +92,28 @@ const parseMigration = (content) => {
   };
 };
 
-const writeMetadata = () => {
-  fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2), "utf8");
+const writeMetadata = async (connection) => {
+  // Insert/update migration records in database
+  console.log(`💾 Writing migration metadata to database...`);
+  for (const migrationFile of metadata.applied) {
+    try {
+      const [result] = await connection.query(
+        'INSERT INTO schema_migrations (migration_file, executed_at, success) VALUES (?, NOW(), 1) ON DUPLICATE KEY UPDATE executed_at = NOW(), success = 1',
+        [migrationFile]
+      );
+      console.log(`✅ Recorded migration: ${migrationFile}, result:`, result);
+    } catch (error) {
+      console.error(`Failed to record migration ${migrationFile}:`, error);
+    }
+  }
+  
+  // Verify records were written
+  try {
+    const [records] = await connection.query('SELECT migration_file, executed_at FROM schema_migrations ORDER BY executed_at DESC LIMIT 5');
+    console.log(`📋 Recent migration records:`, records);
+  } catch (error) {
+    console.error('Failed to verify migration records:', error);
+  }
 };
 
 const run = async () => {
@@ -94,7 +123,9 @@ const run = async () => {
   try {
     console.log(`🔄 Attempting to connect to MySQL...`);
     connection = await pool.getConnection();
-    console.log("✅ Connected to MySQL successfully!\n");
+    console.log("✅ Connected to MySQL successfully!");
+    console.log(`📊 Connection ID: ${connection.threadId}`);
+    console.log(`🔗 Database: ${database}`);
 
     if (command === "up") {
       const pending = migrations.filter((file) => !metadata.applied.includes(file));
@@ -117,13 +148,20 @@ const run = async () => {
         try {
           for (const statement of up) {
             if (statement.length > 0) {
+              console.log(`🔧 Executing: ${statement}`);
               await connection.query(statement);
             }
           }
           await connection.commit();
           metadata.applied.push(file);
-          writeMetadata();
+          await writeMetadata(connection);
           console.log(`✅ Applied ${file}\n`);
+          
+          // Verify table was created
+          if (file.includes('create_portfolio_schema')) {
+            const [tables] = await connection.query('SHOW TABLES');
+            console.log(`📋 Tables in database:`, tables.map(t => Object.values(t)[0]));
+          }
         } catch (error) {
           await connection.rollback();
           console.error(`❌ Error in migration ${file}:`);
@@ -157,7 +195,7 @@ const run = async () => {
         }
         await connection.commit();
         metadata.applied.pop();
-        writeMetadata();
+        await writeMetadata(connection);
         console.log(`✅ Rolled back ${last}`);
       } catch (error) {
         await connection.rollback();

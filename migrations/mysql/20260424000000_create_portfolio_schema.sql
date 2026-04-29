@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS external_links (
 CREATE TABLE IF NOT EXISTS projects (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  slug VARCHAR(255) NOT NULL UNIQUE,
+  slug VARCHAR(255) NOT NULL UNIQUE DEFAULT (CONCAT('project-', id, '-', LOWER(REPLACE(IFNULL(name, ''), ' ', '-'))),
   skill TEXT,
   description TEXT,
   repo_url TEXT,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS project_external_links (
 CREATE TABLE IF NOT EXISTS blogs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  slug VARCHAR(255) NOT NULL UNIQUE,
+  slug VARCHAR(255) NOT NULL UNIQUE DEFAULT (CONCAT('blog-', id, '-', LOWER(REPLACE(IFNULL(name, ''), ' ', '-'))),
   author VARCHAR(255),
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   description TEXT,
@@ -43,8 +43,18 @@ CREATE TABLE IF NOT EXISTS blogs (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS schema_migrations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  migration_file VARCHAR(255) NOT NULL UNIQUE,
+  executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  success TINYINT(1) NOT NULL DEFAULT 1,
+  error_message TEXT,
+  execution_time_ms INT
+);
+
 -- down
 DROP TABLE IF EXISTS project_external_links;
 DROP TABLE IF EXISTS blogs;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS external_links;
+DROP TABLE IF EXISTS schema_migrations;
