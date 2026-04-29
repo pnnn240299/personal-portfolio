@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Login</title>
+</head>
+<body>
+    <h1>Debug Login</h1>
+    
+    <h2>Test Database Connection</h2>
+    <button onclick="testDatabase()">Test Database</button>
+    <pre id="dbResult"></pre>
+    
+    <h2>Check Users</h2>
+    <button onclick="checkUsers()">Check Users</button>
+    <pre id="checkResult"></pre>
+    
+    <h2>Setup Admin User</h2>
+    <button onclick="setupAdmin()">Setup Admin</button>
+    <pre id="setupResult"></pre>
+    
+    <h2>Reset Password</h2>
+    <button onclick="resetPassword()">Reset Password to "admin123"</button>
+    <pre id="resetResult"></pre>
+    
+    <h2>Test Login</h2>
+    <input type="email" id="email" placeholder="Email" value="admin@example.com">
+    <input type="password" id="password" placeholder="Password" value="admin123">
+    <button onclick="testLogin()">Test Login</button>
+    <pre id="loginResult"></pre>
+
+    <script>
+        async function testDatabase() {
+            try {
+                const response = await fetch('/api/test-db');
+                const result = await response.json();
+                document.getElementById('dbResult').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('dbResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function checkUsers() {
+            try {
+                const response = await fetch('/api/check-user');
+                const result = await response.json();
+                document.getElementById('checkResult').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('checkResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function setupAdmin() {
+            try {
+                const response = await fetch('/api/setup-admin', { method: 'POST' });
+                const result = await response.json();
+                document.getElementById('setupResult').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('setupResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function resetPassword() {
+            try {
+                const response = await fetch('/api/reset-password', { method: 'POST' });
+                const result = await response.json();
+                document.getElementById('resetResult').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('resetResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+                
+                const result = await response.json();
+                document.getElementById('loginResult').textContent = 
+                    `Status: ${response.status}\n` + 
+                    JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('loginResult').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const connection = await pool.getConnection()
     const [rows] = await connection.execute(
-      'SELECT id, username, email, created_at, updated_at FROM admin_users ORDER BY created_at DESC'
+      'SELECT id, username, email, created_at, updated_at FROM users ORDER BY created_at DESC'
     )
     connection.release()
     
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     const connection = await pool.getConnection()
     const [result] = await connection.execute(
-      'INSERT INTO admin_users (username, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())',
+      'INSERT INTO users (username, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())',
       [username, email, hashedPassword]
     )
     connection.release()

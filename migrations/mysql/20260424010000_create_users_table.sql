@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users (email, password, name, role)
-VALUES ('admin@portfolio.com', 'admin123', 'Admin User', 'admin');
+VALUES ('admin@portfolio.com', '$2a$10$WXieh8EVyXKZclLxfq5f2OW0/w2cTP14HUUFcfY4Ch4ynabQ1dsyW', 'Admin User', 'admin'); //12345678
 
 -- down
 DROP TABLE IF EXISTS users;

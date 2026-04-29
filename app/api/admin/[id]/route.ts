@@ -10,7 +10,7 @@ export async function GET(
     const { id } = await params
     const connection = await pool.getConnection()
     const [rows] = await connection.execute(
-      'SELECT id, username, email, created_at, updated_at FROM admin_users WHERE id = ?',
+      'SELECT id, username, email, created_at, updated_at FROM users WHERE id = ?',
       [id]
     )
     connection.release()
@@ -49,7 +49,7 @@ export async function PUT(
     }
 
     const connection = await pool.getConnection()
-    let updateQuery = 'UPDATE admin_users SET username = ?, email = ?, updated_at = NOW()'
+    let updateQuery = 'UPDATE users SET username = ?, email = ?, updated_at = NOW()'
     let updateParams = [username, email]
 
     if (password) {
@@ -91,7 +91,7 @@ export async function DELETE(
     const { id } = await params
     const connection = await pool.getConnection()
     const [result] = await connection.execute(
-      'DELETE FROM admin_users WHERE id = ?',
+      'DELETE FROM users WHERE id = ?',
       [id]
     )
     connection.release()

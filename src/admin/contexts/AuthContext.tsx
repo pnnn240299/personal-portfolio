@@ -3,9 +3,10 @@
 import * as React from 'react';
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 interface AdminUser {
-  id: string;
+  id: number;
   email: string;
   name: string;
   role: string;
@@ -42,8 +43,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedUser = localStorage.getItem('adminUser');
+      const cookieUser = Cookies.get('adminUser');
       if (storedUser) {
         setUser(JSON.parse(storedUser));
+      } else if (cookieUser) {
+        setUser(JSON.parse(cookieUser));
+        localStorage.setItem('adminUser', cookieUser);
       }
     }
     setIsLoading(false);
@@ -53,8 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-      const response = await fetch(`${apiUrl}/api/login`, {
+      const response = await fetch('/api/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +74,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(adminUser);
       if (typeof window !== 'undefined') {
         localStorage.setItem("adminUser", JSON.stringify(adminUser));
+        Cookies.set("adminUser", JSON.stringify(adminUser), { 
+          expires: 7, // 7 days
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict'
+        });
       }
       return true;
     } catch (error) {
@@ -84,8 +93,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     if (typeof window !== 'undefined') {
       localStorage.removeItem('adminUser');
+      Cookies.remove('adminUser');
     }
-    router.push('/admin/auth/sign-in');
+    router.push('/auth/signin');
   };
 
   const value: AuthContextType = {
