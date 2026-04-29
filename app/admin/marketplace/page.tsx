@@ -1,6 +1,6 @@
 'use client'
 
-import Banner from "@/admin/pages/marketplace/components/Banner";
+import Banner from "app/admin/marketplace/components/Banner";
 import NFt2 from "@/admin/assets/img/nfts/Nft2.png";
 import NFt4 from "@/admin/assets/img/nfts/Nft4.png";
 import NFt3 from "@/admin/assets/img/nfts/Nft3.png";
@@ -10,9 +10,9 @@ import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
 import avatar2 from "@/admin/assets/img/avatars/avatar2.png";
 import avatar3 from "@/admin/assets/img/avatars/avatar3.png";
 
-import tableDataTopCreators from "@/admin/pages/marketplace/variables/tableDataTopCreators";
-import HistoryCard from "@/admin/pages/marketplace/components/HistoryCard";
-import TopCreatorTable from "@/admin/pages/marketplace/components/TableTopCreators";
+import tableDataTopCreators from "app/admin/marketplace/variables/tableDataTopCreators";
+import HistoryCard from "app/admin/marketplace/components/HistoryCard";
+import TopCreatorTable from "app/admin/marketplace/components/TableTopCreators";
 import NftCard from "@/admin/components/card/NftCard";
 
 const Marketplace = () => {

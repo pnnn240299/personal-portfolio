@@ -1,7 +1,7 @@
 'use client'
 
 import DefaultTable from "@/admin/components/table/DefaultTable";
-import { columns } from "@/admin/pages/external_links/variables/columns";
+import { columns } from "app/admin/external_link/variables/columns";
 import Link from "next/link";
 import useDataCRUD from "@/lib/useDataCRUD";
 import { GetExternalLinks } from "@/types/external_links";

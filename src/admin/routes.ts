@@ -30,12 +30,6 @@ const routes = [
     icon: "🔗",
   },
   {
-    name: "User",
-    layout: "/admin",
-    path: "user",
-    icon: "👤",
-  },
-  {
     name: "Profile",
     layout: "/admin",
     path: "profile",

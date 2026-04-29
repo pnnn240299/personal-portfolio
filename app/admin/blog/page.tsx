@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from "react";
 import Link from "next/link";
 import BlogCard from "./components/BlogCard";
 import avatar1 from "@/admin/assets/img/avatars/avatar1.png";
