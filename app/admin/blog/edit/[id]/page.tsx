@@ -1,14 +1,14 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDataCRUD from "@/lib/useDataCRUD";
 import Editor from "../../components/Editor";
 
-const BlogEdit = ({ params }: { params: { id: string } }) => {
+const BlogEdit = ({ params }: { params: Promise<{ id: string }> }) => {
   const router = useRouter();
   const { updateItem, getItem, loading, error, success } = useDataCRUD("blogs");
-  const id = params.id;
+  const id = use(params).id;
 
   const [formData, setFormData] = useState({
     title: "",
@@ -80,7 +80,7 @@ const BlogEdit = ({ params }: { params: { id: string } }) => {
           value={formData.thumbnail_url}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
-          placeholder="URL hình ảnh"
+          placeholder="Upload hình ảnh"
         />
 
         <label className="block text-sm font-medium text-gray-700">Nội dung bài viết</label>

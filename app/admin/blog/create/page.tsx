@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useDataCRUD from "@/lib/useDataCRUD";
 import Editor from "../components/Editor";
+import slugify from 'slugify';
 
 const BlogCreate = () => {
   const router = useRouter();
@@ -34,7 +35,11 @@ const BlogCreate = () => {
     }
 
     // Generate slug from title if not provided
-    const slug = formData.slug || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const slug = formData.slug || slugify(formData.title, {
+      lower: true,
+      strict: true,
+      trim: true
+    });
     
     const blogData = {
       title: formData.title.trim(),
@@ -43,8 +48,6 @@ const BlogCreate = () => {
       description: formData.description.trim(),
       thumbnail_url: formData.thumbnail_url.trim(),
     };
-    
-    console.log("Sending blog data:", blogData);
     
     try {
       await createItem(blogData);
@@ -100,7 +103,7 @@ const BlogCreate = () => {
           value={formData.thumbnail_url}
           onChange={handleChange}
           className="w-full p-2 border border-gray-300 rounded-md mb-4"
-          placeholder="URL hình ảnh"
+          placeholder="Upload hình ảnh"
         />
 
         <label className="block text-sm font-medium text-gray-700">Nội dung bài viết</label>

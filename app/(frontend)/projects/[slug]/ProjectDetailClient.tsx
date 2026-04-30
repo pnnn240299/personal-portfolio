@@ -26,141 +26,164 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
   const imageInView = useInView(imageRef, { once: true });
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <FuzzyOverlay />
-
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 z-0"
-        >
-          <Image
-            src={project.image || ''}
-            alt={project.title || project.name}
-            fill
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-        <div className="relative z-10 text-center px-4">
-          <motion.h1
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold mb-4"
-          >
-            {project.title || project.name}
-          </motion.h1>
-          <motion.p
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-xl md:text-2xl mb-8"
-          >
-            {project.description || project.longDescription}
-          </motion.p>
+    <>
+      <div className="bg-gray-50">
+        <div className="relative overflow-hidden rounded-b-[80px]">
+          <section className="relative grid h-[70vh] w-full place-content-center overflow-hidden bg-[#fff]">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="relative text-center z-0 text-[10vw] font-black text-neutral-800 md:text-[60px]"
+            >
+              {project.title || project.name}<span className="text-orange-500">.</span>
+            </motion.h2>
+          </section>
+          <FuzzyOverlay />
         </div>
-      </section>
 
-      {/* Stats Section */}
-      <motion.section
-        ref={statsRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={statsInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="py-20 px-4 md:px-8 lg:px-16"
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {project.stats?.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl font-bold text-blue-400 mb-2">{stat.value}</div>
-              <div className="text-gray-400">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </motion.section>
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <motion.div 
+            ref={statsRef}
+            initial={{ opacity: 0, y: 50 }}
+            animate={statsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
+          >
+            {project.stats?.map((stat, index) => (
+              <div key={index} className="text-center">
+                <h3 className="text-2xl font-bold text-orange-500">{stat.value}</h3>
+                <p className="text-gray-600">{stat.label}</p>
+              </div>
+            )) || [
+              { value: "5520", label: "Elements created" },
+              { value: "4688", label: "Lines of code" },
+              { value: "TBA", label: "Awards & Mentions" },
+              { value: "35", label: "Total Project Days" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <h3 className="text-2xl font-bold text-orange-500">{stat.value}</h3>
+                <p className="text-gray-600">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
 
-      {/* Info Section */}
-      <motion.section
-        ref={infoRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={infoInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="py-20 px-4 md:px-8 lg:px-16 bg-gray-900"
-      >
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
-          <div>
-            <h2 className="text-3xl font-bold mb-8">Project Overview</h2>
-            <p className="text-gray-300 leading-relaxed mb-8">{project.longDescription || project.description}</p>
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-xl font-semibold mb-2">Technologies Used</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies?.map((tech, index) => (
-                    <span key={index} className="bg-blue-600 px-3 py-1 rounded-full text-sm">
-                      {tech}
-                    </span>
-                  ))}
+          <div className="flex flex-col md:flex-row gap-16">
+            <motion.div 
+              ref={infoRef}
+              initial={{ opacity: 0, x: -50 }}
+              animate={infoInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="md:w-1/3"
+            >
+              <div className="mb-12">
+                <h3 className="text-xl font-semibold mb-4">Project Info</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold">BRAND</h4>
+                    <p>{project.title || project.name}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">TYPE</h4>
+                    <p>Website</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">TECHNOLOGY</h4>
+                    <ul className='flex flex-wrap gap-2'>
+                      {project.technologies?.map((tech, index) => (
+                        <li className='bg-green-200 p-1 rounded-lg px-2' key={index}>{tech}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-              {(project.github || project.demo) && (
-                <div className="pt-4">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mr-4 px-4 py-2 bg-white text-black rounded hover:bg-gray-200 transition"
-                    >
-                      View on GitHub
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition"
-                    >
-                      Live Demo
-                    </a>
-                  )}
+
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Services</h3>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>Web Design</li>
+                  <li>Web Development</li>
+                  <li>Animations</li>
+                  <li>Branding</li>
+                </ul>
+              </div>
+
+              {(project.github || project.repo_url || project.demo || project.live_url) && (
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold mb-4">Links</h3>
+                  <div className="space-y-2">
+                    {(project.github || project.repo_url) && (
+                      <a 
+                        href={project.github || project.repo_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-block bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors"
+                      >
+                        View on GitHub
+                      </a>
+                    )}
+                    {(project.demo || project.live_url) && (
+                      <a 
+                        href={project.demo || project.live_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-block bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors ml-2"
+                      >
+                        Visit Website
+                      </a>
+                    )}
+                  </div>
                 </div>
               )}
-            </div>
+            </motion.div>
+
+            <motion.div 
+              ref={descriptionRef}
+              initial={{ opacity: 0, x: 50 }}
+              animate={descriptionInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="md:w-2/3"
+            >
+              <div className="mb-12">
+                <h2 className="text-3xl font-bold mb-4">Project Description</h2>
+                <p className="text-gray-700 leading-relaxed">{project.description || project.longDescription}</p>
+              </div>
+
+              <div className="mb-12">
+                <h2 className="text-3xl font-bold mb-4">Features</h2>
+                <ul className="list-disc list-inside space-y-2">
+                  {project.stats?.map((stat, index) => (
+                    <li key={index} className="text-gray-700">{stat.label}</li>
+                  )) || [
+                    "Responsive Design",
+                    "Modern UI/UX",
+                    "Performance Optimized",
+                    "SEO Friendly"
+                  ].map((feature, index) => (
+                    <li key={index} className="text-gray-700">{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
           </div>
+
           <motion.div
             ref={imageRef}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={imageInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={imageInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mt-16"
           >
-            <Image
-              src={project.image || ''}
+            <img
+              src={project.image_url || project.image || ''}
               alt={project.title || project.name}
-              width={600}
-              height={400}
-              className="w-full rounded-lg"
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded-lg shadow-2xl"
             />
           </motion.div>
         </div>
-      </motion.section>
-
-      {/* Description Section */}
-      <motion.section
-        ref={descriptionRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={descriptionInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="py-20 px-4 md:px-8 lg:px-16"
-      >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Detailed Description</h2>
-          <p className="text-gray-300 leading-relaxed">{project.longDescription || project.description}</p>
-        </div>
-      </motion.section>
-    </div>
+      </div>
+    </>
   );
 }

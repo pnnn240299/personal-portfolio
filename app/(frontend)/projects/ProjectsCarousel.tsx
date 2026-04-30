@@ -43,6 +43,17 @@ export default function ProjectsCarousel({ initialProjects }: ProjectsCarouselPr
   const mainRef = useRef(null);
   const carouselRef = useRef(null);
   const { position } = useElementViewportPosition(mainRef);
+
+  // Debug: Log projects data
+  initialProjects.forEach((project, index) => {
+    console.log(`Project ${index}:`, {
+      id: project.id,
+      title: project.title,
+      image_url: project.image_url,
+      image: project.image,
+      finalImage: project.image_url || project.image || ''
+    });
+  });
   const [carouselEndPosition, setCarouselEndPosition] = useState(0);
   const { scrollYProgress, scrollY } = useScroll();
   const x = useTransform(scrollYProgress, position, [0, carouselEndPosition]);
@@ -88,22 +99,25 @@ export default function ProjectsCarousel({ initialProjects }: ProjectsCarouselPr
                 className="group relative w-[300px] md:w-[500px] overflow-hidden"
               >
                 <Link href={`/projects/${item.slug || item.id}`}>
-                  <div className="relative w-full h-full">
                     <Image
-                      className="w-full flex-shrink-0 h-full object-cover rounded-3xl"
-                      src={item?.image || ''}
-                      alt={item.title}
+                      className="w-full flex-shrink-0 object-cover rounded-3xl !h-[300px]"
+                      src={item?.image_url || item?.image || '/placeholder-image.jpg'}
+                      alt={item.name}
                       width={500}
-                      height={500}
+                      height={300}
+                      onError={(e) => {
+                        console.error('Image failed to load:', {
+                          src: e.currentTarget.src,
+                          projectId: item.id,
+                          title: item.title
+                        });
+                        // Fallback to placeholder
+                        e.currentTarget.src = '/placeholder-image.jpg';
+                      }}
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="text-white text-center">
-                        <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                        <p className="text-sm">{item.description}</p>
-                        <MoveUpRight className="mx-auto mt-4" size={24} />
-                      </div>
+                    <div className='absolute top-4 right-4 bg-green-200 p-2 rounded-3xl'>
+                      <MoveUpRight />
                     </div>
-                  </div>
                 </Link>
               </motion.div>
             ))}

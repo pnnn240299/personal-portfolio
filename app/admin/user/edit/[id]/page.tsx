@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { HiArrowLeft, HiSave, HiUser, HiMail, HiLockClosed, HiShieldCheck } from "react-icons/hi";
 import useDataCRUD from "@/lib/useDataCRUD";
 
-const UserEdit = ({ params }: { params: { id: string } }) => {
+const UserEdit = ({ params }: { params: Promise<{ id: string }> }) => {
   const router = useRouter();
   const { updateItem, getItem, loading, error, success } = useDataCRUD("users");
-  const id = params.id;
+  const id = use(params).id;
 
   const [formData, setFormData] = useState({
     name: "",

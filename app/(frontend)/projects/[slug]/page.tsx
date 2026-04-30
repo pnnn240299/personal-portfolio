@@ -28,8 +28,12 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailPagePr
   let project: Project | null = null;
   let error = null;
 
+  // In Next.js App Router, params is a Promise
+  const resolvedParams = await params;
+
   try {
-    project = await projectsService.getProjectById(params.slug);
+    project = await projectsService.getProjectById(resolvedParams.slug);
+    console.log('ProjectDetailsPage - found project:', project);
   } catch (err) {
     error = `Failed to load project: ${err}`;
     console.error(error);
@@ -41,7 +45,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailPagePr
         <SEO
           title="Project Not Found"
           description="This project could not be found."
-          path={`/projects/${params.slug}`}
+          path={`/projects/${resolvedParams.slug}`}
         />
         <div className="min-h-screen flex items-center justify-center bg-black text-white">
           <div className="text-center">
@@ -58,7 +62,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailPagePr
       <SEO
         title={project.title || project.name || 'Project'}
         description={project.description}
-        path={`/projects/${params.slug}`}
+        path={`/projects/${resolvedParams.slug}`}
       />
       <ProjectDetailClient project={project} />
     </>

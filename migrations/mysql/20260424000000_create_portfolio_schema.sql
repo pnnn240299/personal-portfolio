@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS external_links (
 CREATE TABLE IF NOT EXISTS projects (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  slug VARCHAR(255) NOT NULL UNIQUE DEFAULT (CONCAT('project-', id, '-', LOWER(REPLACE(IFNULL(name, ''), ' ', '-'))),
+  slug VARCHAR(255) NOT NULL UNIQUE,
   skill TEXT,
   description TEXT,
   repo_url TEXT,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS project_external_links (
 CREATE TABLE IF NOT EXISTS blogs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  slug VARCHAR(255) NOT NULL UNIQUE DEFAULT (CONCAT('blog-', id, '-', LOWER(REPLACE(IFNULL(name, ''), ' ', '-'))),
+  slug VARCHAR(255) NOT NULL UNIQUE,
   author VARCHAR(255),
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   description TEXT,

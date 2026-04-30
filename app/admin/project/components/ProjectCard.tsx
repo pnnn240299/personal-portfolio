@@ -6,7 +6,7 @@ import Card from "@/admin/components/card";
 import Link from "next/link";
 import Image from "next/image";
 
-const NewCard = (props: {
+const ProjectCard = (props: {
   image: any;
   name: string;
   description: string;
@@ -116,4 +116,4 @@ const NewCard = (props: {
   );
 };
 
-export default NewCard;
+export default ProjectCard;

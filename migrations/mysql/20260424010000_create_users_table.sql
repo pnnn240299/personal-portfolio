@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (email, password, name, role)
-VALUES ('admin@portfolio.com', '$2a$10$WXieh8EVyXKZclLxfq5f2OW0/w2cTP14HUUFcfY4Ch4ynabQ1dsyW', 'Admin User', 'admin'); //12345678
+INSERT IGNORE INTO users (email, password, name, role)
+VALUES ('admin@portfolio.com', '$2a$10$WXieh8EVyXKZclLxfq5f2OW0/w2cTP14HUUFcfY4Ch4ynabQ1dsyW', 'Admin User', 'admin'); -- 12345678
 
 -- down
 DROP TABLE IF EXISTS users;
